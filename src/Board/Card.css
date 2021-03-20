@@ -1,0 +1,15 @@
+.card_container{
+    width:100px; 
+    height: 100px; 
+    border-radius: 70%;
+}
+
+.card{
+    height: 100px; 
+    width: 100px; 
+}
+
+
+.card:hover{
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 255, .2);
+}
