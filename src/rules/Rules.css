@@ -1,0 +1,26 @@
+h1 {
+  color: black;
+  text-align: center;
+}
+
+p {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1em;
+  text-align: justify;
+  padding: 1%;
+  margin: 2%;
+}
+
+#game_rules {
+  border-radius: 2em;
+  border-color: black;
+  border-style: solid;
+  margin: 2em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  width: 70%;
+  word-wrap: break-word;
+}

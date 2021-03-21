@@ -1,0 +1,14 @@
+#board {
+  border-radius: 2em;
+  border-color: black;
+  border-style: solid;
+  margin: 3em;
+  padding: 1%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  width: 25%;
+  word-wrap: break-word;
+}
