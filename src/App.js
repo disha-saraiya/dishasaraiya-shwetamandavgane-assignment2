@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import Rules from './rules/Rules'; 
 
-import test from "./haskell/diagrams/Diamond-Blue-Empty-Three.svg";
+//import test from "./haskell/diagrams/Diamond-Blue-Empty-Three.svg";
 import Board from './Board/Board'; 
 
 
@@ -24,15 +24,19 @@ function App() {
           </ul>
         </nav>
 
-      <Switch>
+        <Switch>
           <Route path="/rules">
             <Rules />
           </Route>
+          <Route path="/">
+            <Board />
+          </Route>
         </Switch>
-        <div>
-          {/* <img height="180" width="180" alt = "diagram" src={test} />  */}
+       {/*} <div>
+           <img height="180" width="180" alt = "diagram" src={test} />  
           <Board /> 
-          </div>
+  </div>*/}
+          
       </div>
     </Router>
   );

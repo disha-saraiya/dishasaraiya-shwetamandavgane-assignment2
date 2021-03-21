@@ -1,25 +1,30 @@
 import React from 'react';
+import './Rules.css';
 
 function Rules () {
     return(
         <div id="rules">
             <h1>Rules</h1>
-			<p>The object of the game is to identify a 'Set' of three cards 
-				from 12 cards laid out on the table. Each card has a variation of the following 
-				four features:
-			</p>
-			<p> 1) <b>COLOR:</b>
-    				Each card is red, green, or blue. <br/>
-				2) <b>SYMBOL:</b>
-    				Each card contains ovals, squiggles, or diamonds. <br/>
-				3) <b>NUMBER:</b>
-    				Each card has one, two, or three symbols. <br/>
-				4) <b>SHADING:</b>
-    				Each card is solid, open, or striped. <br/>
-			</p>
-			<p>
-			A 'Set' consists of three cards in which each feature is EITHER the same on each card OR is different on each card. That is to say, any feature in the 'Set' of three cards is either common to all three cards or is different on each card.
-			</p>
+			<div id="game_rules">
+				<p>The object of the game is to identify a 'Set' of three cards
+					from 12 cards laid out on the table. Each card has a variation of the following 
+					four features: 
+				</p>
+				<p> 1) <b>COLOR :  </b>
+						Each card is red, green, or blue. <br/>
+					2) <b>SYMBOL :  </b>
+						Each card contains ovals, squiggles, or diamonds. <br/>
+					3) <b>NUMBER :  </b>
+						Each card has one, two, or three symbols. <br/>
+					4) <b>SHADING :  </b>
+						Each card is solid, open, or striped. <br/>
+				</p>
+				<p>
+				A 'Set' consists of three cards in which each feature is EITHER the 
+				same on each card OR is different on each card. That is to say, any feature 
+				in the 'Set' of three cards is either common to all three cards or is different on each card.
+				</p>
+			</div>
 		</div>
 			/* <h4>Examples of sets: </h4>
 1) <b>color:</b> different on each card, <b>symbol:</b> the same on each card (oval), <b>number:</b> the same on each (two), <b>shading:</b> the same on each card (solid)
