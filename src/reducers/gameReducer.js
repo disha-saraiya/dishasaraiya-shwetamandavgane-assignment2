@@ -1,59 +1,105 @@
-const all81Cards = (() => {
-    let shapes   = ["Diamond", "Circle", "Triangle"];
-    let colors   = ["Red", "Green", "Blue"];
-    let fillings = ["Empty", "Solid", "Lined"];
-    let numbers  = ["One", "Two", "Three"];
+// The game reducer will contain the entire logic for creating a new game. It holds the logic for creating an array
+
+import Board from "../Board/Board";
+
+// of 81 cards and 27 cards, and for selecting 12 random cards out of the entire deck for putting on the Board. 
+let shapes   = ["Diamond", "Round", "Triangle"];
+let colors   = ["Red", "Green", "Blue"];
+let fillings = ["Empty", "Solid", "Lined"];
+let numbers  = ["One", "Two", "Three"];
   
-    let all81Cards = [];
+  var allCards = (() => {  
+    let allCards = [];
     for (var shape in shapes)
       for (var color in colors)
         for (var filling in fillings)
           for (var number in numbers)
-            all81Cards.push({
+            allCards.push({
               shape: shapes[shape],
               color: colors[color],
               filling: fillings[filling],
               number: numbers[number]
             });
-    return all81Cards;
+    return allCards;
   })();
 
-
-  const just27Cards = (() => {
-    let shapes   = ["Diamond", "Circle", "Triangle"];
-    let fillings = ["Empty", "Solid", "Lined"];
-    let numbers  = ["One", "Two", "Three"];
-  
-    let just27Cards = [];
-    for (var shape in shapes)
+  var twentySevenCards = (() => {  
+    let just27cards = [];
+      for (var color in colors)
         for (var filling in fillings)
           for (var number in numbers)
-            just27Cards.push({
-              shape: shapes[shape],
+            just27cards.push({
+              shape: "Triangle",
+              color: colors[color],
               filling: fillings[filling],
-              number: numbers[number],
-              //color: "red"
+              number: numbers[number]
             });
-    return just27Cards;
+    return just27cards;
   })();
 
+  var fileStem = ""; 
+  var index = 0;
+  var imgPath = ""; 
+  var filePath = ""; 
+  var filePathArray = []; 
 
-  export default function gameReducer(state = {
-      cardsOnBoard = [], usedCards = [], setMade = [], 
-  }, action){
+  function generateRandomCards(cardArray) {
+      // Generate random number within the range of 
+      // length of allCards array
+      var randomShapeIndex = Math.floor(Math.random() * allCards.length);
+      var randomColorIndex = Math.floor(Math.random() * allCards.length);
+      var randomFillingIndex = Math.floor(Math.random() * allCards.length);
+      var randomNumberIndex = Math.floor(Math.random() * allCards.length);
 
-    let random12from27; 
-    let random12from81; 
+      //Selecting a random card out of the 81 cards and making it a fileStem, which will be the name of the card in the public/img folder.
+      //This is so that we can dynamically select cards to display. 
+      fileStem =
+      allCards[randomShapeIndex].shape + "-" +
+      allCards[randomColorIndex].color + "-" +
+      allCards[randomFillingIndex].filling + "-" +
+      allCards[randomNumberIndex].number; 
+
+      //Get the index of the used card (that is already on the board now) so that we can remove it from the whole deck and not display it again. 
+
+      index = allCards.findIndex(function (allCard) {
+        return allCard.shape === allCards[randomShapeIndex].shape &&
+                allCard.color === allCards[randomColorIndex].color &&
+                allCard.filling === allCards[randomFillingIndex].filling &&
+                allCard.number === allCards[randomNumberIndex].number
+              ;
+      });
+    
+  }
+
+  
+  function generateFilePaths(){
+    generateRandomCards(allCards); 
+    imgPath = "/img/" + fileStem + ".svg"; 
+    filePath = process.env.PUBLIC_URL + imgPath;
+  }
+
+  for(var i=0; i<12; i++){
+    generateFilePaths(); 
+    filePathArray.push(filePath); 
+  }
+
+//console.log(filePathArray); 
+//generateRandomCards(allCards); 
+
+//Remove the used card from the deck of all cards. 
+//allCards.splice(index,1);
 
 
-      if(action.type === "EASY"){
+export default function GameReducer(state = {
+  currentCardsOnBoard : []
+}, action){
+
+    state.currentCardsOnBoard = filePathArray; 
+
+      if(action.type === 'NEW_GAME'){
         return{
-            cardsOnBoard = random12from27
+          currentCardsOnBoard : [...state.currentCardsOnBoard, filePathArray]
         }
-      }else if(action.type === "MEDIUM"){
-
-      }else if(action.type === "HARD"){
-
       }
       return state; 
       
