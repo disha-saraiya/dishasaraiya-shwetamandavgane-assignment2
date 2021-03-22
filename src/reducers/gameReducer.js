@@ -37,68 +37,107 @@ let numbers  = ["One", "Two", "Three"];
     return just27cards;
   })();
 
-  var fileStem = ""; 
+  // console.log(allCards); 
+
+  // console.log(twentySevenCards); 
+
+  var fileStem = "";
+  var easyFileStem = "";  
   var index = 0;
   var imgPath = ""; 
   var filePath = ""; 
   var filePathArray = []; 
+  var easyFilePathArray = [];
+  var easyImgPath = ""; 
+  var easyFilePath= ""; 
 
   function generateRandomCards(cardArray) {
       // Generate random number within the range of 
       // length of allCards array
-      var randomShapeIndex = Math.floor(Math.random() * allCards.length);
-      var randomColorIndex = Math.floor(Math.random() * allCards.length);
-      var randomFillingIndex = Math.floor(Math.random() * allCards.length);
-      var randomNumberIndex = Math.floor(Math.random() * allCards.length);
+      var randomShapeIndex = Math.floor(Math.random() * cardArray.length);
+      var randomColorIndex = Math.floor(Math.random() * cardArray.length);
+      var randomFillingIndex = Math.floor(Math.random() * cardArray.length);
+      var randomNumberIndex = Math.floor(Math.random() * cardArray.length);
 
       //Selecting a random card out of the 81 cards and making it a fileStem, which will be the name of the card in the public/img folder.
       //This is so that we can dynamically select cards to display. 
       fileStem =
-      allCards[randomShapeIndex].shape + "-" +
-      allCards[randomColorIndex].color + "-" +
-      allCards[randomFillingIndex].filling + "-" +
-      allCards[randomNumberIndex].number; 
+      cardArray[randomShapeIndex].shape + "-" +
+      cardArray[randomColorIndex].color + "-" +
+      cardArray[randomFillingIndex].filling + "-" +
+      cardArray[randomNumberIndex].number; 
+
+      easyFileStem =  "Triangle-" + 
+      cardArray[randomColorIndex].color + "-" +
+      cardArray[randomFillingIndex].filling + "-" +
+      cardArray[randomNumberIndex].number; 
 
       //Get the index of the used card (that is already on the board now) so that we can remove it from the whole deck and not display it again. 
 
-      index = allCards.findIndex(function (allCard) {
-        return allCard.shape === allCards[randomShapeIndex].shape &&
-                allCard.color === allCards[randomColorIndex].color &&
-                allCard.filling === allCards[randomFillingIndex].filling &&
-                allCard.number === allCards[randomNumberIndex].number
+      index = cardArray.findIndex(function (allCard) {
+        return allCard.shape === cardArray[randomShapeIndex].shape &&
+                allCard.color === cardArray[randomColorIndex].color &&
+                allCard.filling === cardArray[randomFillingIndex].filling &&
+                allCard.number === cardArray[randomNumberIndex].number
               ;
       });
     
   }
 
-  
-  function generateFilePaths(){
+  function generateAllFilePaths(){
     generateRandomCards(allCards); 
     imgPath = "/img/" + fileStem + ".svg"; 
     filePath = process.env.PUBLIC_URL + imgPath;
   }
 
+
   for(var i=0; i<12; i++){
-    generateFilePaths(); 
+    generateAllFilePaths(); 
     filePathArray.push(filePath); 
   }
 
-//console.log(filePathArray); 
-//generateRandomCards(allCards); 
+  function generateEasyFilePaths(){
+    generateRandomCards(twentySevenCards);
+    easyImgPath = "/img/" + easyFileStem + ".svg"; 
+    easyFilePath = process.env.PUBLIC_URL + easyImgPath;
+  }
+
+  for(var i=0; i<12; i++){
+    generateEasyFilePaths(); 
+    easyFilePathArray.push(easyFilePath); 
+  }
+
+
+//console.log(easyFilePathArray); 
 
 //Remove the used card from the deck of all cards. 
 //allCards.splice(index,1);
 
 
 export default function GameReducer(state = {
-  currentCardsOnBoard : []
+  currentCardsOnBoard : [], currentCardsOnEasyBoard: []
 }, action){
 
     state.currentCardsOnBoard = filePathArray; 
+    state.currentCardsOnEasyBoard = easyFilePathArray;
 
-      if(action.type === 'NEW_GAME'){
+    console.log(filePathArray); 
+    console.log(easyFilePathArray); 
+
+       if(action.type === 'NEW_GAME_EASY'){
         return{
-          currentCardsOnBoard : [...state.currentCardsOnBoard, filePathArray]
+          currentCardsOnBoard: [], 
+          currentCardsOnEasyBoard: state.currentCardsOnEasyBoard
+        }
+      }else if(action.type === 'NEW_GAME_MEDIUM'){
+        return{
+          currentCardsOnBoard : state.currentCardsOnBoard, 
+          currentCardsOnEasyBoard: []
+        }
+      }else if(action.type === 'NEW_GAME_HARD'){
+        return{
+          currentCardsOnBoard : state.currentCardsOnBoard,
+          currentCardsOnEasyBoard: []
         }
       }
       return state; 

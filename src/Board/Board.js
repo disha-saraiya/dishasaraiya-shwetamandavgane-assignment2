@@ -9,7 +9,7 @@ function Board(props){
     return(
         <div id="board">
             {props.cardsArray.map((e)  => {
-                return <Card imgLink = {e} /> 
+                return <Card imgLink = {e} key = {e} /> 
             })}
         </div>
     )
