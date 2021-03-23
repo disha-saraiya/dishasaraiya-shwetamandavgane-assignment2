@@ -1,15 +1,15 @@
-.card_container{
-    width:100px; 
-    height: 100px; 
-    border-radius: 70%;
-}
-
 .card{
-    height: 100px; 
-    width: 100px; 
+    height: 120px; 
+    width: 120px; 
 }
 
 
 .card:hover{
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 255, .2);
+    box-shadow: rgba(99, 120, 212, 0.377) 0px 30px 60px -12px inset, rgba(255, 247, 247, 0.3) 0px 18px 36px -18px inset;
+
+}
+
+.visited{
+    height: 150px; 
+    width: 150px;
 }

@@ -1,14 +1,15 @@
 #board {
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr);
   border-radius: 2em;
-  border-color: black;
+  border-color: blue; 
   border-style: solid;
   margin: 3em;
   padding: 1%;
   position: fixed;
   top: 50%;
   left: 50%;
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
-  width: 25%;
-  word-wrap: break-word;
+  width: 500px;
+  height: 500px;  
 }

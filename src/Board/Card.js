@@ -3,8 +3,15 @@ import './Card.css';
 
 
 function Card(props){
+
+const toggleClick = (selected) => {
+    
+}
+
+
+
 return(
-            <img className = "card" src = {props.imgLink} alt={props.imgLink}/>
+            <img onClick = {() => toggleClick(this)} className = "card" src = {props.imgLink} alt={props.imgLink}/>
         )
 }
 

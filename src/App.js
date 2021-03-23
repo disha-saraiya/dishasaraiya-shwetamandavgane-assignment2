@@ -9,45 +9,9 @@ import {
   Link, Switch, Route
 } from "react-router-dom";
 import Rules from './rules/Rules'; 
-import {useSelector, useDispatch, Provider} from 'react-redux'; 
+import {useSelector, useDispatch} from 'react-redux'; 
 import {newGameEasy, newGameMedium, newGameHard} from './actions'; 
-import Board from './Board/Board'; 
-import gameReducer from './reducers/gameReducer';
 
-
-// function App() {
-//   return (
-//     <Router>
-//       <div>
-//         <nav>
-//           <ul>
-//             <li>
-//               <Link to = "/"> Home </Link>
-//             </li>
-//             <li>
-//               <Link to = "/rules"> Rules </Link>
-//             </li>
-//           </ul>
-//         </nav>
-
-//         <Switch>
-//           <Route path="/rules">
-//             <Rules />
-//           </Route>
-//           <Route path="/">
-//             <Board />
-//           </Route>
-//         </Switch>
-//        {/*} <div>
-//            <img height="180" width="180" alt = "diagram" src={test} />  
-//           <Board /> 
-//   </div>*/}
-          
-//       </div>
-//     </Router>
- 
-//   );
-//}
 
 function App(){
   const newGame = useSelector(state => state.newGame);
@@ -57,10 +21,15 @@ function App(){
   return (
     <Router>
       <div>
+
+        <h1> SET </h1>
         <nav>
           <ul>
             <li>
-              <Link to = "/easy"> New Game - Easy</Link>
+              <Link to = "/"> Home </Link>
+            </li>
+            <li>
+              <Link to = "/easy" onClick = {() => dispatch(newGameEasy())} > New Game - Easy</Link>
             </li>
             <li>
               <Link to = "/medium" onClick = {() => dispatch(newGameMedium())} > New Game - Medium</Link>
@@ -74,25 +43,21 @@ function App(){
           </ul>
         </nav>
 
+
         <Switch>
           <Route path="/rules" >
             <Rules />
           </Route>
           <Route path="/easy">
-            <Board cardsArray = {newGame.currentCardsOnEasyBoard} />
+            <EasyGame />
           </Route>
           <Route path="/medium">
-            <Board cardsArray = {newGame.currentCardsOnBoard} />
+            <MediumGame />
           </Route>
           <Route path="/hard">
-            <Board cardsArray = {newGame.currentCardsOnBoard} />
+            <HardGame />
           </Route>
-        </Switch>
-       {/*} <div>
-           <img height="180" width="180" alt = "diagram" src={test} />  
-          <Board /> 
-  </div>*/}
-          
+        </Switch>          
       </div>
     </Router>
  

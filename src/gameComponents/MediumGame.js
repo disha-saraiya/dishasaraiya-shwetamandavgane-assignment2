@@ -1,6 +1,20 @@
 import React from 'react';
+import {useSelector, useDispatch, Provider} from 'react-redux'; 
+import Board from '../Board/Board'; 
+import Draw3 from '../buttonComponent/Draw3';
+import ResetButton from '../buttonComponent/ResetButton';
+
 
 export default function MediumGame(){
+
+    const newGame = useSelector(state => state.newGame);
+
     return(
-        <h1> Medium Game </h1>)
+        <div>
+            <ResetButton/>
+            <Draw3 />
+            <Board cardsArray = {newGame.currentCardsOnBoard} />
+        </div>
+    )
+
 }

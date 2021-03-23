@@ -118,25 +118,19 @@ export default function GameReducer(state = {
   currentCardsOnBoard : [], currentCardsOnEasyBoard: []
 }, action){
 
-    state.currentCardsOnBoard = filePathArray; 
-    state.currentCardsOnEasyBoard = easyFilePathArray;
-
-    console.log(filePathArray); 
-    console.log(easyFilePathArray); 
-
        if(action.type === 'NEW_GAME_EASY'){
         return{
-          currentCardsOnBoard: [], 
-          currentCardsOnEasyBoard: state.currentCardsOnEasyBoard
+          currentCardsOnEasyBoard: [...easyFilePathArray], 
+          currentCardsOnBoard: []
         }
       }else if(action.type === 'NEW_GAME_MEDIUM'){
         return{
-          currentCardsOnBoard : state.currentCardsOnBoard, 
+          currentCardsOnBoard : [...filePathArray],  
           currentCardsOnEasyBoard: []
         }
       }else if(action.type === 'NEW_GAME_HARD'){
         return{
-          currentCardsOnBoard : state.currentCardsOnBoard,
+          currentCardsOnBoard : [...filePathArray],
           currentCardsOnEasyBoard: []
         }
       }
