@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'; 
-import {newGameMedium, resetNormalGame} from '../actions'; 
+import {newGameMedium} from '../actions'; 
 import Board from '../Board/Board'; 
 import Draw3 from '../buttonComponent/Draw3';
 import ResetButton from '../buttonComponent/ResetButton';
@@ -19,10 +19,10 @@ export default function MediumGame(){
     return(
         <div>
             <div class = "wrapBoardButtons"> 
-                <ResetButton/>
+                <ResetButton typeOfReset = {"normal"}/>
                 <Draw3 />
             </div>
-            <Board cardsArray = {newGame.currentCardsOnBoard} />
+            <Board cardsArray = {newGame.currentCardsOnBoard}  gameLevel="medium"/>
         </div>
     )
 

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'; 
-import {newGameEasy, resetEasyGame} from '../actions'; 
+import {newGameEasy} from '../actions'; 
 import Board from '../Board/Board'; 
 import Draw3 from '../buttonComponent/Draw3';
 import ResetButton from '../buttonComponent/ResetButton';
@@ -17,12 +17,12 @@ export default function EasyGame(){
     }, [dispatch])
     
     return(
-        <div> 
+        <div > 
             <div class = "wrapBoardButtons"> 
-                <ResetButton onClick = {() => dispatch(resetEasyGame())}/>
+                <ResetButton typeOfReset = {"easy"}/>
                 <Draw3 />
             </div>
-            <Board cardsArray = {newGame.currentCardsOnEasyBoard} />    
+            <Board cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>    
         </div>
         )
 }

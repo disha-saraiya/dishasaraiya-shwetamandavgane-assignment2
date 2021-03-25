@@ -1,13 +1,22 @@
 // The game reducer will contain the entire logic for creating a new game. It holds the logic for creating an array
 
-import Board from "../Board/Board";
-
 // of 81 cards and 27 cards, and for selecting 12 random cards out of the entire deck for putting on the Board. 
-let shapes   = ["Diamond", "Round", "Triangle"];
-let colors   = ["Red", "Green", "Blue"];
-let fillings = ["Empty", "Solid", "Lined"];
-let numbers  = ["One", "Two", "Three"];
+var shapes   = ["Diamond", "Round", "Triangle"];
+var colors   = ["Red", "Green", "Blue"];
+var fillings = ["Empty", "Solid", "Lined"];
+var numbers  = ["One", "Two", "Three"];
+var fileStem = "";
+var easyFileStem = "";  
+var index = 0;
+var imgPath = ""; 
+var filePath = ""; 
+var filePathArray = []; 
+var easyFilePathArray = [];
+var easyImgPath = ""; 
+var easyFilePath= ""; 
+
   
+function generateAllCards(){
   var allCards = (() => {  
     let allCards = [];
     for (var shape in shapes)
@@ -22,30 +31,25 @@ let numbers  = ["One", "Two", "Three"];
             });
     return allCards;
   })();
+  return allCards; 
+}
 
-  var twentySevenCards = (() => {  
-    let just27cards = [];
-      for (var color in colors)
-        for (var filling in fillings)
-          for (var number in numbers)
-            just27cards.push({
-              shape: "Triangle",
-              color: colors[color],
-              filling: fillings[filling],
-              number: numbers[number]
-            });
-    return just27cards;
-  })();
-
-  var fileStem = "";
-  var easyFileStem = "";  
-  var index = 0;
-  var imgPath = ""; 
-  var filePath = ""; 
-  var filePathArray = []; 
-  var easyFilePathArray = [];
-  var easyImgPath = ""; 
-  var easyFilePath= ""; 
+  function generate27Cards(){
+    var newTwentySevenCards = (() => {  
+      let just27cards = [];
+        for (var color in colors)
+          for (var filling in fillings)
+            for (var number in numbers)
+              just27cards.push({
+                shape: "Triangle",
+                color: colors[color],
+                filling: fillings[filling],
+                number: numbers[number]
+              });
+      return just27cards;
+    })();
+    return newTwentySevenCards; 
+  }
 
   function generateRandomCards(cardArray) {
     var randomShapeIndex = 0; 
@@ -85,50 +89,33 @@ let numbers  = ["One", "Two", "Three"];
 
 
       cardArray.splice(index,1);
-
-
-
-      //Get the index of the used card (that is already on the board now) so that we can remove it from the whole deck and not display it again. 
   }
  
-  function generateAllFilePaths(){
+  function generateAllFilePaths(cardArray){
     var resultArray =[];
     for(let i=0; i<12; i++){
-    generateRandomCards(allCards); 
+    generateRandomCards(cardArray); 
     imgPath = "/img/" + fileStem + ".svg"; 
     filePath = process.env.PUBLIC_URL + imgPath;
     resultArray.push(filePath); 
   }
-  return resultArray; 
+  return resultArray; //result will contain 81 differnet paths 
   }
 
-filePathArray = generateAllFilePaths(); 
 
-function generateEasyFilePaths(){
-    generateRandomCards(twentySevenCards); 
+function generateEasyFilePaths(cardArray){
+  var resultArray = [];
+  for(var i=0; i<12; i++){
+    generateRandomCards(cardArray); 
     easyImgPath = "/img/" + easyFileStem + ".svg"; 
     easyFilePath = process.env.PUBLIC_URL + easyImgPath;
-    
+    resultArray.push(easyFilePath); 
+  }
+  return resultArray;  
   }
 
-  for(var i=0; i<12; i++){
-    generateEasyFilePaths(); 
-    easyFilePathArray.push(easyFilePath); 
-    
-  }
-
-//   var randomEasyPaths = []; 
-
-//   function generateRandomEasyPathArray(randomarray){
-//   for(var i=0; i<12; i++){
-//     generateEasyFilePaths(); 
-//     randomarray.push(easyFilePath); 
-//     return randomarray; 
-//   }
-// }
-
-//   randomEasyPaths = generateRandomEasyPathArray(randomEasyPaths); 
-
+  filePathArray = generateAllFilePaths(generateAllCards()); 
+  easyFilePathArray = generateEasyFilePaths(generate27Cards()); 
 
   const checkIsSet = (c1,c2,c3) => { 
     var cardA = c1.replace('.svg', '').replace('/img/', '').split('-'); 
@@ -181,6 +168,7 @@ export default function GameReducer(state = {
 }, action){
   
        if(action.type === 'NEW_GAME_EASY'){
+         //console.log("easy game new reached reducer"); 
         return{
           currentCardsOnEasyBoard: [...easyFilePathArray], 
           currentCardsOnBoard: [],
@@ -203,25 +191,61 @@ export default function GameReducer(state = {
           selectedCards: [],
           isCardNotClicked: true,
           allPossibleSets: [...allPossibleSets]
-
         }
       }else if(action.type === 'RESET_EASY'){
+        var resetFilePathArray = []; 
+        resetFilePathArray = generateEasyFilePaths(generate27Cards()); 
         return{
-          currentCardsOnEasyBoard: [...easyFilePathArray], 
+          currentCardsOnEasyBoard: [...resetFilePathArray], 
           currentCardsOnBoard: [],
           selectedCards: [],
           isCardNotClicked: true, 
           allPossibleEasySets:[...allPossibleEasySets]
         }
       }else if(action.type === 'RESET_NORMAL'){
+        var resetFilePathArray = []; 
+        resetFilePathArray = generateAllFilePaths(generateAllCards()); 
         return{
-          currentCardsOnBoard : [...filePathArray],  
+          currentCardsOnBoard : [...resetFilePathArray],  
           currentCardsOnEasyBoard: [],
           selectedCards: [],
           isCardNotClicked: true, 
           allPossibleSets: [...allPossibleSets]
         }
-      }
-    
+      } 
       return state; 
   }
+
+
+    // var twentySevenCards = (() => {  
+  //   let just27cards = [];
+  //     for (var color in colors)
+  //       for (var filling in fillings)
+  //         for (var number in numbers)
+  //           just27cards.push({
+  //             shape: "Triangle",
+  //             color: colors[color],
+  //             filling: fillings[filling],
+  //             number: numbers[number]
+  //           });
+  //   return just27cards;
+  // })();
+
+
+    // for(var i=0; i<12; i++){
+  //   generateEasyFilePaths(); 
+  //   easyFilePathArray.push(easyFilePath); 
+    
+  // }
+
+//   var randomEasyPaths = []; 
+
+//   function generateRandomEasyPathArray(randomarray){
+//   for(var i=0; i<12; i++){
+//     generateEasyFilePaths(); 
+//     randomarray.push(easyFilePath); 
+//     return randomarray; 
+//   }
+// }
+
+//   randomEasyPaths = generateRandomEasyPathArray(randomEasyPaths); 

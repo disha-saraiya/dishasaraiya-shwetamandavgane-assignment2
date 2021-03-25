@@ -1,7 +1,10 @@
 .wrapBoardButtons {
   display: flex;
+  position: relative; 
   flex-direction: row;
   height: fit-content;
   width: fit-content;
   margin-top: 0px;
+  margin-bottom: 50px;
 }
+

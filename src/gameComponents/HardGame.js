@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'; 
-import {newGameHard, resetNormalGame} from '../actions'; 
+import {newGameHard} from '../actions'; 
 import Board from '../Board/Board'; 
 import Draw3 from '../buttonComponent/Draw3';
 import ResetButton from '../buttonComponent/ResetButton';
@@ -18,10 +18,10 @@ export default function HardGame(){
     return(
         <div>
         <div class = "wrapBoardButtons">     
-            <ResetButton />
+            <ResetButton typeOfReset = {"normal"}/>
             <Draw3 />
         </div>
-        <Board cardsArray = {newGame.currentCardsOnBoard} />
+        <Board cardsArray = {newGame.currentCardsOnBoard}  gameLevel="hard"/>
         </div>
     )
 

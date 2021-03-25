@@ -1,5 +1,6 @@
 
 export const newGameEasy = () => {
+    console.log("reached action for new game easy"); 
     return{
         type: 'NEW_GAME_EASY',
         
@@ -19,6 +20,7 @@ export const newGameHard = () => {
 }
 
 export const resetEasyGame = () => {
+    console.log("reached action for reset easy"); 
     return{
         type: 'RESET_EASY'
     }

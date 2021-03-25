@@ -17,7 +17,6 @@ function App(){
   return (
     <Router>
       <div class="wrapper">
-
         <h1> SET GAME </h1>
         <div id = "first">
           <button class="button"> <a href = "/"> Home </a></button>
