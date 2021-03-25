@@ -46,7 +46,6 @@ let numbers  = ["One", "Two", "Three"];
   var easyFilePathArray = [];
   var easyImgPath = ""; 
   var easyFilePath= ""; 
-  var allEasySetArray = []; 
 
   function generateRandomCards(cardArray) {
     var randomShapeIndex = 0; 
@@ -86,58 +85,52 @@ let numbers  = ["One", "Two", "Three"];
 
 
       cardArray.splice(index,1);
- 
+
 
 
       //Get the index of the used card (that is already on the board now) so that we can remove it from the whole deck and not display it again. 
   }
+ 
   function generateAllFilePaths(){
+    var resultArray =[];
+    for(let i=0; i<12; i++){
     generateRandomCards(allCards); 
     imgPath = "/img/" + fileStem + ".svg"; 
     filePath = process.env.PUBLIC_URL + imgPath;
+    resultArray.push(filePath); 
+  }
+  return resultArray; 
   }
 
+filePathArray = generateAllFilePaths(); 
 
-  for(var i=0; i<12; i++){
-    generateAllFilePaths(); 
-    filePathArray.push(filePath); 
-  }
-
-  function generateEasyFilePaths(){
-    generateRandomCards(twentySevenCards);
+function generateEasyFilePaths(){
+    generateRandomCards(twentySevenCards); 
     easyImgPath = "/img/" + easyFileStem + ".svg"; 
     easyFilePath = process.env.PUBLIC_URL + easyImgPath;
+    
   }
 
   for(var i=0; i<12; i++){
     generateEasyFilePaths(); 
     easyFilePathArray.push(easyFilePath); 
+    
   }
 
-  // const checkIsSet = (cardArray) => { 
-  //   var cardA = cardArray[0].replace('.svg', '').replace('/img/', '').split('-'); 
-  //   var cardB = cardArray[1].replace('.svg', '').replace('/img/', '').split('-'); 
-  //   var cardC = cardArray[2].replace('.svg', '').replace('/img/', '').split('-'); 
-  //   //0-shape 1-color 2-filling 3-number
-    
-  //   var flag = [false, false, false, false]; 
-  
-  //   for(var k in cardA){   
-  //       if((cardA[k] === cardB[k] && cardB[k] === cardC[k] && cardC[k] === cardA[k]) 
-  //       || (cardA[k] !== cardB[k] && cardB[k] !== cardC[k] && cardC[k] !== cardA[k])){
-  //           flag[k] = true; 
-  //       }
-  //   }
-    
-  //   if(flag[0] === true && flag [1] === true  && flag[2] === true && flag[3] === true){
-  //       console.log("this is a set"); 
-  //   }else{
-  //       console.log("this is not a set")
-  //   }
-  // }
+//   var randomEasyPaths = []; 
+
+//   function generateRandomEasyPathArray(randomarray){
+//   for(var i=0; i<12; i++){
+//     generateEasyFilePaths(); 
+//     randomarray.push(easyFilePath); 
+//     return randomarray; 
+//   }
+// }
+
+//   randomEasyPaths = generateRandomEasyPathArray(randomEasyPaths); 
+
 
   const checkIsSet = (c1,c2,c3) => { 
-    console.log(c1); 
     var cardA = c1.replace('.svg', '').replace('/img/', '').split('-'); 
     var cardB = c2.replace('.svg', '').replace('/img/', '').split('-'); 
     var cardC = c3.replace('.svg', '').replace('/img/', '').split('-'); 
@@ -153,75 +146,82 @@ let numbers  = ["One", "Two", "Three"];
     }
     
     if(flag[0] === true && flag [1] === true  && flag[2] === true && flag[3] === true){
-        console.log("this is a set"); 
+        //console.log("this is a set"); 
+        return true;
     }else{
-        console.log("this is not a set")
+        //console.log("this is not a set");
+        return false;
     }
-  }
+  }       
+  
 
-
-const allEasySets = (filePaths) => {
+const allSets = (filePaths) => {
   var result = []; 
-  var checkArray = [];
   if (filePaths == null) return result;
   
-  for (var ai = 0; ai < 27; ai++) {
-      var a = filePaths[ai];
-
-      for (var bi = ai + 1; bi < 27; bi++) {
-          var b = filePaths[bi];
-
-          for (var ci = bi + 1; ci < 27; ci++) {
-              var c = filePaths[ci];
-       
-              if (checkIsSet(a,b,c)){
-                  var set = [];
-                  set.push(a);
-                  set.push(b);
-                  set.push(c);
-                  result.push(set);
+  for (let a = 0; a < filePaths.length; a++) {
+      for (let b = a + 1; b < filePaths.length; b++) {
+          for (let c = b + 1; c < filePaths.length; c++) {
+              if (checkIsSet(filePaths[a],filePaths[b],filePaths[c])){
+                  result.push([filePaths[a], filePaths[b], filePaths[c]]);
               }
           }
       }
   }
-  console.log(result); 
   return result;
 }
-console.log(allEasySets(easyFilePathArray)); 
 
-
-
+var allPossibleEasySets = allSets(easyFilePathArray); 
+var allPossibleSets = allSets(filePathArray); 
 
 
 export default function GameReducer(state = {
-  currentCardsOnBoard : [], currentCardsOnEasyBoard: [], selectedCards:[], areSetCards:[], isCardNotClicked: true
+  currentCardsOnBoard : [], currentCardsOnEasyBoard: [], selectedCards:[], areSetCards:[], isCardNotClicked: true, 
+  allPossibleEasySets:[], allPossibleSets:[]
 }, action){
   
-  
-  console.log(state.currentCardsOnBoard); 
-
        if(action.type === 'NEW_GAME_EASY'){
         return{
           currentCardsOnEasyBoard: [...easyFilePathArray], 
           currentCardsOnBoard: [],
           selectedCards: [],
-          isCardNotClicked: true
+          isCardNotClicked: true, 
+          allPossibleEasySets:[...allPossibleEasySets]
         }
       }else if(action.type === 'NEW_GAME_MEDIUM'){
         return{
           currentCardsOnBoard : [...filePathArray],  
           currentCardsOnEasyBoard: [],
           selectedCards: [],
-          isCardNotClicked: true
+          isCardNotClicked: true, 
+          allPossibleSets: [...allPossibleSets]
         }
       }else if(action.type === 'NEW_GAME_HARD'){
         return{
           currentCardsOnBoard : [...filePathArray],
           currentCardsOnEasyBoard: [],
           selectedCards: [],
-          isCardNotClicked: true
+          isCardNotClicked: true,
+          allPossibleSets: [...allPossibleSets]
+
+        }
+      }else if(action.type === 'RESET_EASY'){
+        return{
+          currentCardsOnEasyBoard: [...easyFilePathArray], 
+          currentCardsOnBoard: [],
+          selectedCards: [],
+          isCardNotClicked: true, 
+          allPossibleEasySets:[...allPossibleEasySets]
+        }
+      }else if(action.type === 'RESET_NORMAL'){
+        return{
+          currentCardsOnBoard : [...filePathArray],  
+          currentCardsOnEasyBoard: [],
+          selectedCards: [],
+          isCardNotClicked: true, 
+          allPossibleSets: [...allPossibleSets]
         }
       }
+    
       return state; 
-      
   }

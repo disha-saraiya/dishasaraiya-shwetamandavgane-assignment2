@@ -1,5 +1,6 @@
-import React from 'react';
-import {useSelector, useDispatch, Provider} from 'react-redux'; 
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux'; 
+import {newGameEasy, resetEasyGame} from '../actions'; 
 import Board from '../Board/Board'; 
 import Draw3 from '../buttonComponent/Draw3';
 import ResetButton from '../buttonComponent/ResetButton';
@@ -8,10 +9,16 @@ import ResetButton from '../buttonComponent/ResetButton';
 export default function EasyGame(){
 
     const newGame = useSelector(state => state.newGame);
+    const dispatch = useDispatch(); 
+    
+    //Since the useEffect() functions are run on every subsequent re-render/update, we can tell React to skip a run, for performance purposes, by adding a second parameter which is an array that contains a list of state variables to watch for. React will only re-run the side effect if one of the items in this array changes.
+    useEffect(() => {
+        dispatch(newGameEasy()); 
+    }, [dispatch])
 
     return(
         <div>
-        <ResetButton />
+        <ResetButton onClick = {() => dispatch(resetEasyGame())}/>
         <Draw3 />
         <Board cardsArray = {newGame.currentCardsOnEasyBoard} />
         </div>

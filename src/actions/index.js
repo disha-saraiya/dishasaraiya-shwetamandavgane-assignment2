@@ -17,3 +17,15 @@ export const newGameHard = () => {
         type: 'NEW_GAME_HARD'
     }
 }
+
+export const resetEasyGame = () => {
+    return{
+        type: 'RESET_EASY'
+    }
+}
+export const resetNormalGame = () => {
+    return{
+        type: 'RESET_NORMAL'
+    }
+}
+

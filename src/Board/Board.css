@@ -1,9 +1,10 @@
 #board {
   display: grid; 
   grid-template-columns: repeat(4, 1fr);
-  border-radius: 2em;
-  border-color: blue; 
-  border-style: solid;
+  border: 3px solid #333333;
+  border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+  position:relative;
+  
   margin: 3em;
   padding: 1%;
   position: fixed;

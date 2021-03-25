@@ -5,46 +5,30 @@ import HardGame from './gameComponents/HardGame';
 
 
 import {
-  BrowserRouter as Router,
-  Link, Switch, Route
+  BrowserRouter as Router,Switch, Route
 } from "react-router-dom";
 import Rules from './rules/Rules'; 
-import {useSelector, useDispatch} from 'react-redux'; 
-import {newGameEasy, newGameMedium, newGameHard} from './actions'; 
 
 
 function App(){
-  const newGame = useSelector(state => state.newGame);
-  const dispatch = useDispatch();  
-  console.log(newGame)
+
+//Reference for useEffect - https://www.pluralsight.com/guides/firing-redux-actions-on-route-transitions
 
   return (
     <Router>
       <div>
 
         <h1> SET </h1>
-        <nav>
-          <ul>
-            <li>
-              <Link to = "/"> Home </Link>
-            </li>
-            <li>
-              <Link to = "/easy" onClick = {() => dispatch(newGameEasy())} > New Game - Easy</Link>
-            </li>
-            <li>
-              <Link to = "/medium" onClick = {() => dispatch(newGameMedium())} > New Game - Medium</Link>
-            </li>
-            <li>
-              <Link to = "/hard" onClick = {() => dispatch(newGameHard())}> New Game - Hard</Link>
-            </li>
-            <li>
-              <Link to = "/rules"> Rules </Link>
-            </li>
-          </ul>
-        </nav>
+        <div className = "buttons_container">
+        <button> <a href = "/"> Home </a></button>
+        <button> <a href = "/easy"> New Game - Easy </a> </button>
+        <button> <a href = "/medium"> New Game - Medium </a> </button>
+        <button> <a href = "/hard"> New Game - Hard </a> </button>
+        <button> <a href = "/rules"> Rules </a> </button> 
 
-
+        </div>
         <Switch>
+        <Route path="/" component={App}>
           <Route path="/rules" >
             <Rules />
           </Route>
@@ -56,6 +40,7 @@ function App(){
           </Route>
           <Route path="/hard">
             <HardGame />
+          </Route>
           </Route>
         </Switch>          
       </div>
