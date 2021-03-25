@@ -4,7 +4,7 @@ import {newGameEasy, resetEasyGame} from '../actions';
 import Board from '../Board/Board'; 
 import Draw3 from '../buttonComponent/Draw3';
 import ResetButton from '../buttonComponent/ResetButton';
-
+import "./game.css"
 
 export default function EasyGame(){
 
@@ -15,12 +15,14 @@ export default function EasyGame(){
     useEffect(() => {
         dispatch(newGameEasy()); 
     }, [dispatch])
-
+    
     return(
-        <div>
-        <ResetButton onClick = {() => dispatch(resetEasyGame())}/>
-        <Draw3 />
-        <Board cardsArray = {newGame.currentCardsOnEasyBoard} />
+        <div> 
+            <div class = "wrapBoardButtons"> 
+                <ResetButton onClick = {() => dispatch(resetEasyGame())}/>
+                <Draw3 />
+            </div>
+            <Board cardsArray = {newGame.currentCardsOnEasyBoard} />    
         </div>
         )
 }

@@ -1,7 +1,8 @@
 import React from 'react';
+import "./buttons.css";
 
 export default function ResetButton(){
     return(
-        <button> Reset Game </button>
+        <button class="resetButton"> Reset Game </button>
         )
 }

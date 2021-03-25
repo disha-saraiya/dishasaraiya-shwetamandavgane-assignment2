@@ -18,8 +18,10 @@ export default function MediumGame(){
 
     return(
         <div>
-            <ResetButton/>
-            <Draw3 />
+            <div class = "wrapBoardButtons"> 
+                <ResetButton/>
+                <Draw3 />
+            </div>
             <Board cardsArray = {newGame.currentCardsOnBoard} />
         </div>
     )

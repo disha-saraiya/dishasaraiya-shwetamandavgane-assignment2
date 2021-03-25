@@ -1,10 +1,10 @@
 #board {
-  display: grid; 
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
   border: 3px solid #333333;
-  border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
-  position:relative;
-  
+  border-radius: 4% 4% 4% 4% / 4% 4% 4% 4%;
+  position: relative;
+
   margin: 3em;
   padding: 1%;
   position: fixed;
@@ -12,5 +12,5 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 500px;
-  height: 500px;  
+  height: 400px;
 }

@@ -2,10 +2,9 @@ import React from 'react';
 import './Rules.css';
 
 function Rules () {
-    return(
-        <div id="rules">
-            <h1>Rules</h1>
+    return(            
 			<div id="game_rules">
+			<h3>Rules</h3>
 				<p>The object of the game is to identify a 'Set' of three cards
 					from 12 cards laid out on the table. Each card has a variation of the following 
 					four features: 
@@ -25,7 +24,7 @@ function Rules () {
 				in the 'Set' of three cards is either common to all three cards or is different on each card.
 				</p>
 			</div>
-		</div>
+		
 			/* <h4>Examples of sets: </h4>
 1) <b>color:</b> different on each card, <b>symbol:</b> the same on each card (oval), <b>number:</b> the same on each (two), <b>shading:</b> the same on each card (solid)
 <table class="small"><tbody><tr>

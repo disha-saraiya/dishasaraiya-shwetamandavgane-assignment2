@@ -16,36 +16,37 @@ function App(){
 
   return (
     <Router>
-      <div>
+      <div class="wrapper">
 
-        <h1> SET </h1>
-        <div className = "buttons_container">
-        <button> <a href = "/"> Home </a></button>
-        <button> <a href = "/easy"> New Game - Easy </a> </button>
-        <button> <a href = "/medium"> New Game - Medium </a> </button>
-        <button> <a href = "/hard"> New Game - Hard </a> </button>
-        <button> <a href = "/rules"> Rules </a> </button> 
+        <h1> SET GAME </h1>
+        <div id = "first">
+          <button class="button"> <a href = "/"> Home </a></button>
+          <button class="button"> <a href = "/easy"> New Game - Easy </a> </button>
+          <button class="button"> <a href = "/medium"> New Game - Medium </a> </button>
+          <button class="button"> <a href = "/hard"> New Game - Hard </a> </button>
+          <button class="button"> <a href = "/rules"> Rules </a> </button> 
+        </div>  
 
-        </div>
-        <Switch>
-        <Route path="/" component={App}>
-          <Route path="/rules" >
-            <Rules />
+        <div id="second">
+          <Switch>
+          <Route path="/" component={App}>
+              <Route path="/rules" >
+                <Rules />
+              </Route>
+              <Route path="/easy">
+                <EasyGame />
+              </Route>
+              <Route path="/medium">
+                <MediumGame />
+              </Route>
+              <Route path="/hard">
+                <HardGame />
+              </Route>
           </Route>
-          <Route path="/easy">
-            <EasyGame />
-          </Route>
-          <Route path="/medium">
-            <MediumGame />
-          </Route>
-          <Route path="/hard">
-            <HardGame />
-          </Route>
-          </Route>
-        </Switch>          
-      </div>
-    </Router>
- 
+          </Switch>                
+     </div>
+     </div>
+     </Router>
   )
 }
 
