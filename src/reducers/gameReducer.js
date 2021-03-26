@@ -1,6 +1,7 @@
 // The game reducer will contain the entire logic for creating a new game. It holds the logic for creating an array
-
 // of 81 cards and 27 cards, and for selecting 12 random cards out of the entire deck for putting on the Board. 
+
+//Global variable declaration
 var shapes   = ["Diamond", "Round", "Triangle"];
 var colors   = ["Red", "Green", "Blue"];
 var fillings = ["Empty", "Solid", "Lined"];
@@ -10,12 +11,15 @@ var easyFileStem = "";
 var index = 0;
 var imgPath = ""; 
 var filePath = ""; 
-var filePathArray = []; 
+var normalFilePathArray = []; 
 var easyFilePathArray = [];
 var easyImgPath = ""; 
 var easyFilePath= ""; 
+var firstTimeEasyArray = []; 
+var firstTimeNormalArray = [];
 
-  
+
+//--------------------------------------- Common initialization logic ----------------------------------------------------------
 function generateAllCards(){
   var allCards = (() => {  
     let allCards = [];
@@ -51,7 +55,7 @@ function generateAllCards(){
     return newTwentySevenCards; 
   }
 
-  function generateRandomCards(cardArray) {
+  function generateSVGPath(selectedCard) {
 
     var randomShapeIndex = 0; 
     var randomColorIndex = 0; 
@@ -62,42 +66,68 @@ function generateAllCards(){
     while(index === -1){
       // Generate random number within the range of 
       // length of allCards array
-      randomShapeIndex = Math.floor(Math.random() * cardArray.length);
-      randomColorIndex = Math.floor(Math.random() * cardArray.length);
-      randomFillingIndex = Math.floor(Math.random() * cardArray.length);
-      randomNumberIndex = Math.floor(Math.random() * cardArray.length);
+      randomShapeIndex = Math.floor(Math.random() * selectedCard.length);
+      randomColorIndex = Math.floor(Math.random() * selectedCard.length);
+      randomFillingIndex = Math.floor(Math.random() * selectedCard.length);
+      randomNumberIndex = Math.floor(Math.random() * selectedCard.length);
 
-      index = cardArray.findIndex(function (allCard) {
-        return allCard.shape === cardArray[randomShapeIndex].shape &&
-                allCard.color === cardArray[randomColorIndex].color &&
-                allCard.filling === cardArray[randomFillingIndex].filling &&
-                allCard.number === cardArray[randomNumberIndex].number
+      index = selectedCard.findIndex(function (allCard) {
+        return allCard.shape === selectedCard[randomShapeIndex].shape &&
+                allCard.color === selectedCard[randomColorIndex].color &&
+                allCard.filling === selectedCard[randomFillingIndex].filling &&
+                allCard.number === selectedCard[randomNumberIndex].number
               ;
       });
-
-      
     }
       //Selecting a random card out of the 81 cards and making it a fileStem, which will be the name of the card in the public/img folder.
       //This is so that we can dynamically select cards to display. 
       fileStem =
-      cardArray[randomShapeIndex].shape + "-" +
-      cardArray[randomColorIndex].color + "-" +
-      cardArray[randomFillingIndex].filling + "-" +
-      cardArray[randomNumberIndex].number; 
+      selectedCard[randomShapeIndex].shape + "-" +
+      selectedCard[randomColorIndex].color + "-" +
+      selectedCard[randomFillingIndex].filling + "-" +
+      selectedCard[randomNumberIndex].number; 
 
       easyFileStem =  "Triangle-" + 
-      cardArray[randomColorIndex].color + "-" +
-      cardArray[randomFillingIndex].filling + "-" +
-      cardArray[randomNumberIndex].number; 
+      selectedCard[randomColorIndex].color + "-" +
+      selectedCard[randomFillingIndex].filling + "-" +
+      selectedCard[randomNumberIndex].number; 
 
-      cardArray.splice(index,1);
-      
+      selectedCard.splice(index,1);    
   }
  
+// ----------------------------------------------------------- Logic for easy game level -------------------------------------------
+
+  function generateEasyFilePaths(cardArray){
+    var resultArray = [];
+    for(var i=0; i<27; i++){
+      generateSVGPath(cardArray); 
+      easyImgPath = "/img/" + easyFileStem + ".svg"; 
+      easyFilePath = process.env.PUBLIC_URL + easyImgPath;
+      resultArray.push(easyFilePath); 
+    }
+  
+    return resultArray;  
+    }
+  
+  function drawEasyCards(numberOfCards, cardArray){
+      easyFilePathArray = generateEasyFilePaths(generate27Cards()); 
+      for(var i=0; i<numberOfCards; i++){
+        cardArray.push(easyFilePathArray.pop()); 
+      }
+      
+      if(cardArray.length >= 27){
+        alert("Please find sets within 27 cards on deck");
+        return cardArray;
+      }
+      return cardArray;
+    }
+    
+// -------------------------------------------------- Logic for medium and hard game level ------------------------------------------
+  
   function generateAllFilePaths(cardArray){
     var resultArray =[];
-    for(let i=0; i<12; i++){
-    generateRandomCards(cardArray); 
+    for(let i=0; i<81; i++){
+    generateSVGPath(cardArray); 
     imgPath = "/img/" + fileStem + ".svg"; 
     filePath = process.env.PUBLIC_URL + imgPath;
     resultArray.push(filePath); 
@@ -105,52 +135,20 @@ function generateAllCards(){
   return resultArray;  
   }
 
-
-// function generateEasyFilePaths(cardArray){
-//   var resultArray = [];
-//   for(var i=0; i<12; i++){
-//     generateRandomCards(cardArray); 
-//     easyImgPath = "/img/" + easyFileStem + ".svg"; 
-//     easyFilePath = process.env.PUBLIC_URL + easyImgPath;
-//     resultArray.push(easyFilePath); 
-//   }
-//   return resultArray;  
-//   }
-
-function generateEasyFilePaths(cardArray){
-  var resultArray = [];
-  for(var i=0; i<27; i++){
-    generateRandomCards(cardArray); 
-    easyImgPath = "/img/" + easyFileStem + ".svg"; 
-    easyFilePath = process.env.PUBLIC_URL + easyImgPath;
-    resultArray.push(easyFilePath); 
-  }
-
-  return resultArray;  
-  }
-
-  easyFilePathArray = generateEasyFilePaths(generate27Cards()); 
-
-  var resultEasyArray = []; 
-
-  function drawEasyCards(numberOfCards){
-    if(resultEasyArray.length >= 27){
-      alert("Please find sets within 27 cards on deck");
-      return resultEasyArray;
-    }
+    
+  function drawNormalCards(numberOfCards, cardArray){
+    normalFilePathArray = generateAllFilePaths(generateAllCards()); 
     for(var i=0; i<numberOfCards; i++){
-      resultEasyArray.push(easyFilePathArray.pop()); 
+      cardArray.push(normalFilePathArray.pop()); 
     }
-    return resultEasyArray; 
+    if(cardArray.length >= 81){
+      alert("Please find sets within 81 cards on deck");
+      return cardArray;
+    }
+    return cardArray;
   }
+// ---------------------------------------- Common game logic for all levels -----------------------------------------------------
 
-  // console.log("Easy file path array after pop" +drawEasyCards(12))
-  // console.log("Easy file path array after second pop" +drawEasyCards(3))
-
-
-  //filePathArray = generateAllFilePaths(generateAllCards()); 
-
-  
   const checkIsSet = (c1,c2,c3) => { 
     var cardA = c1.replace('.svg', '').replace('/img/', '').split('-'); 
     var cardB = c2.replace('.svg', '').replace('/img/', '').split('-'); 
@@ -167,10 +165,8 @@ function generateEasyFilePaths(cardArray){
     }
     
     if(flag[0] === true && flag [1] === true  && flag[2] === true && flag[3] === true){
-        //console.log("this is a set"); 
         return true;
     }else{
-        //console.log("this is not a set");
         return false;
     }
   }       
@@ -193,9 +189,9 @@ const allSets = (filePaths) => {
 }
 
 var allPossibleEasySets = allSets(easyFilePathArray); 
-console.log(allPossibleEasySets); 
-var allPossibleSets = allSets(filePathArray); 
+var allPossibleSets = allSets(normalFilePathArray); 
 
+// ----------------------------------------------------- Game reducer ---------------------------------------------------------
 
 export default function GameReducer(state = {
   currentCardsOnBoard : [], currentCardsOnEasyBoard: [], selectedCards:[], areSetCards:[], isCardNotClicked: true, 
@@ -203,96 +199,56 @@ export default function GameReducer(state = {
 }, action){
   
        if(action.type === 'NEW_GAME_EASY'){
-         //console.log("easy game new reached reducer"); 
         return{
-          currentCardsOnEasyBoard: [...drawEasyCards(12)], 
-          currentCardsOnBoard: [],
+          currentCardsOnEasyBoard: [...drawEasyCards(12, firstTimeEasyArray)], 
+          selectedCards: [],
+          isCardNotClicked: true, 
+          allPossibleEasySets:[...allPossibleEasySets]
+        }
+      }else if(action.type === 'DRAW_EASY'){
+        return{
+          currentCardsOnEasyBoard: [...drawEasyCards(3, firstTimeEasyArray)],
+          selectedCards: [],
+          isCardNotClicked: true, 
+          allPossibleEasySets:[...allPossibleEasySets]
+        }
+      }else if(action.type === 'RESET_EASY'){
+        firstTimeEasyArray = []; 
+        return{
+          currentCardsOnEasyBoard: [...drawEasyCards(12, firstTimeEasyArray)], 
           selectedCards: [],
           isCardNotClicked: true, 
           allPossibleEasySets:[...allPossibleEasySets]
         }
       }else if(action.type === 'NEW_GAME_MEDIUM'){
         return{
-          currentCardsOnBoard : [...filePathArray],  
-          currentCardsOnEasyBoard: [],
+          currentCardsOnBoard : [...drawNormalCards(12, firstTimeNormalArray)],  
           selectedCards: [],
           isCardNotClicked: true, 
           allPossibleSets: [...allPossibleSets]
         }
       }else if(action.type === 'NEW_GAME_HARD'){
         return{
-          currentCardsOnBoard : [...filePathArray],
-          currentCardsOnEasyBoard: [],
+          currentCardsOnBoard : [...drawNormalCards(12, firstTimeNormalArray)],
           selectedCards: [],
           isCardNotClicked: true,
           allPossibleSets: [...allPossibleSets]
         }
-      }else if(action.type === 'RESET_EASY'){
-        var resetFilePathArray = []; 
-        resetFilePathArray = generateEasyFilePaths(generate27Cards()); 
-        return{
-          currentCardsOnEasyBoard: [...resetFilePathArray], 
-          currentCardsOnBoard: [],
-          selectedCards: [],
-          isCardNotClicked: true, 
-          allPossibleEasySets:[...allPossibleEasySets]
-        }
       }else if(action.type === 'RESET_NORMAL'){
-        var resetFilePathArray = []; 
-        resetFilePathArray = generateAllFilePaths(generateAllCards()); 
+        firstTimeNormalArray = []; 
         return{
-          currentCardsOnBoard : [...resetFilePathArray],  
-          currentCardsOnEasyBoard: [],
+          currentCardsOnBoard : [...drawNormalCards(12, firstTimeNormalArray)],  
           selectedCards: [],
           isCardNotClicked: true, 
           allPossibleSets: [...allPossibleSets]
         }
-      }else if(action.type === 'DRAW_EASY'){
+      }else if(action.type === 'DRAW_NORMAL'){
         return{
-          currentCardsOnEasyBoard: [...drawEasyCards(3)],
-          currentCardsOnBoard: [],
-          selectedCards: [],
+          currentCardsOnBoard: [...drawNormalCards(3, firstTimeNormalArray)], 
+          selectedCards:[], 
           isCardNotClicked: true, 
-          allPossibleEasySets:[...allPossibleEasySets]
-        }
-      } else if(action.type === 'DRAW_NORMAL'){
-        return{
-
+          allPossibleSets: [...allPossibleSets]
         }
       }
       return state; 
   }
-
-
-    // var twentySevenCards = (() => {  
-  //   let just27cards = [];
-  //     for (var color in colors)
-  //       for (var filling in fillings)
-  //         for (var number in numbers)
-  //           just27cards.push({
-  //             shape: "Triangle",
-  //             color: colors[color],
-  //             filling: fillings[filling],
-  //             number: numbers[number]
-  //           });
-  //   return just27cards;
-  // })();
-
-
-    // for(var i=0; i<12; i++){
-  //   generateEasyFilePaths(); 
-  //   easyFilePathArray.push(easyFilePath); 
-    
-  // }
-
-//   var randomEasyPaths = []; 
-
-//   function generateRandomEasyPathArray(randomarray){
-//   for(var i=0; i<12; i++){
-//     generateEasyFilePaths(); 
-//     randomarray.push(easyFilePath); 
-//     return randomarray; 
-//   }
-// }
-
-//   randomEasyPaths = generateRandomEasyPathArray(randomEasyPaths); 

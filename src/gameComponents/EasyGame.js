@@ -17,18 +17,8 @@ export default function EasyGame(){
     }, [dispatch])
     
     return(
-        // <div> 
-        //     <div class = "wrapBoardButtons"> 
-        //         <ResetButton typeOfReset = {"easy"}/>
-        //         <Draw3 />
-        //     </div>
-        //     <Board cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>    
-        // </div>
-<div class="wrapBoardButtons">
-        
-            
-        <div >
-            
+<div class="wrapBoardButtons"> 
+        <div >       
             <Board  cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>
         </div>
         <div class="temporary_div">

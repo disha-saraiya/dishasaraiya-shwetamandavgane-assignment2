@@ -1,0 +1,53 @@
+flow for an easy game:
+elements- 
+board 
+reset button
+draw 3 buttom
+
+generate27Cards()
+-> generates 27 different combinations of color, filling, number for triangle shape. 
+-> returns an array 
+
+generateSVGPath(generate27Cards())
+-> creates fileStems (SVG files) so that we can populate the cards.
+-> splices each card from the 27 cards so that we don't repeat that card on the board
+-> returns ONE file path, one by one
+
+generateEasyFilePaths(generate27Cards())
+-> takes in the array of 27 cards 
+-> for 27 times, generates an SVG path, creates the file path from the PUBLIC folder for the card
+-> populates an array with 27 easy file paths. 
+-> returns an array that contains the 27 paths. 
+
+easyFilePathArray -> Array that contains the 27 paths of the SVG files in the folder. 
+
+drawEasyCards(numberOfCards,cardArray) 
+-> function that draws certain number of cards and pushes it into a card array
+-> this is so that we can populate the board with certain number of cards
+-> for a new game, we need to populate with 12 cards
+-> for every draw button press, we need to fill 3 more cards from THAT deck of cards. 
+-> we need to keep drawing from the same deck till the deck is empty. 
+
+
+
+FOR A NEW EASY GAME: 
+we need to show 12 cards on the board. 
+currentCardsOnEasyBoard => 12 newly drawn cards from the set of 27 cards in total. 
+-> we can use the drawEasyCards function to draw 12 cards INTO a new array. 
+
+use a variable firstTimeEasyArray -> [] and use this to keep drawing and populating the board for one game 
+therefore call drawEasyCards(12, firstTimeEasyArray); 
+after this is called, 
+
+FOR DRAWING 3 cards FROM AN EXISTING EASY GAME: 
+we need to draw the cards from the remainder of the cards AFTER the first call is done. (for a new game)
+-> use the drawEasyCards function to draw 3 cards from the leftover. 
+
+therefore call drawEasyCards(3, firstTimeEasyArray)
+
+keep drawing three cards till all 27 are on board, and then display a message. 
+
+FOR RESETTING AN EASY GAME
+we need to show 12 NEW cards on the board. so this is like creating a new game altogether
+we need to draw 12 new cards, hence we can use an empty array? 
+
