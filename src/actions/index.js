@@ -20,7 +20,6 @@ export const newGameHard = () => {
 }
 
 export const resetEasyGame = () => {
-    console.log("reached action for reset easy"); 
     return{
         type: 'RESET_EASY'
     }
@@ -28,6 +27,17 @@ export const resetEasyGame = () => {
 export const resetNormalGame = () => {
     return{
         type: 'RESET_NORMAL'
+    }
+}
+
+export const drawThreeEasy = () => {
+    return{
+        type: 'DRAW_EASY'
+    }
+}
+export const drawThreeNormal = () => {
+    return{
+        type: 'DRAW_NORMAL'
     }
 }
 

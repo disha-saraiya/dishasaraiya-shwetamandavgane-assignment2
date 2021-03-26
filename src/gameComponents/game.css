@@ -8,3 +8,24 @@
   margin-bottom: 50px;
 }
 
+.game_grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: minmax(100px, auto); 
+  grid-template-areas: 
+  "grid-board grid-board grid-board grid-button grid-button"
+  "grid-board grid-board grid-board grid-button grid-button";
+
+}
+
+.grid_board{
+  grid-area: "grid-board"; 
+
+}
+
+.grid_button{
+  grid-area: "grid-button"; 
+  display: flex; 
+  flex-direction: column;
+}
+

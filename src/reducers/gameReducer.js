@@ -52,6 +52,7 @@ function generateAllCards(){
   }
 
   function generateRandomCards(cardArray) {
+
     var randomShapeIndex = 0; 
     var randomColorIndex = 0; 
     var randomFillingIndex = 0; 
@@ -73,6 +74,8 @@ function generateAllCards(){
                 allCard.number === cardArray[randomNumberIndex].number
               ;
       });
+
+      
     }
       //Selecting a random card out of the 81 cards and making it a fileStem, which will be the name of the card in the public/img folder.
       //This is so that we can dynamically select cards to display. 
@@ -87,8 +90,8 @@ function generateAllCards(){
       cardArray[randomFillingIndex].filling + "-" +
       cardArray[randomNumberIndex].number; 
 
-
       cardArray.splice(index,1);
+      
   }
  
   function generateAllFilePaths(cardArray){
@@ -99,24 +102,50 @@ function generateAllCards(){
     filePath = process.env.PUBLIC_URL + imgPath;
     resultArray.push(filePath); 
   }
-  return resultArray; //result will contain 81 differnet paths 
+  return resultArray;  
   }
 
 
+// function generateEasyFilePaths(cardArray){
+//   var resultArray = [];
+//   for(var i=0; i<12; i++){
+//     generateRandomCards(cardArray); 
+//     easyImgPath = "/img/" + easyFileStem + ".svg"; 
+//     easyFilePath = process.env.PUBLIC_URL + easyImgPath;
+//     resultArray.push(easyFilePath); 
+//   }
+//   return resultArray;  
+//   }
+
 function generateEasyFilePaths(cardArray){
   var resultArray = [];
-  for(var i=0; i<12; i++){
+  for(var i=0; i<27; i++){
     generateRandomCards(cardArray); 
     easyImgPath = "/img/" + easyFileStem + ".svg"; 
     easyFilePath = process.env.PUBLIC_URL + easyImgPath;
     resultArray.push(easyFilePath); 
   }
+
   return resultArray;  
   }
 
-  filePathArray = generateAllFilePaths(generateAllCards()); 
   easyFilePathArray = generateEasyFilePaths(generate27Cards()); 
 
+  var resultEasyArray = []; 
+  function drawEasyCards(numberOfCards){
+    for(var i=0; i<numberOfCards; i++){
+      resultEasyArray.push(easyFilePathArray.pop()); 
+    }
+    return resultEasyArray; 
+  }
+
+  // console.log("Easy file path array after pop" +drawEasyCards(12))
+  // console.log("Easy file path array after second pop" +drawEasyCards(3))
+
+
+  //filePathArray = generateAllFilePaths(generateAllCards()); 
+
+  
   const checkIsSet = (c1,c2,c3) => { 
     var cardA = c1.replace('.svg', '').replace('/img/', '').split('-'); 
     var cardB = c2.replace('.svg', '').replace('/img/', '').split('-'); 
@@ -159,6 +188,7 @@ const allSets = (filePaths) => {
 }
 
 var allPossibleEasySets = allSets(easyFilePathArray); 
+console.log(allPossibleEasySets); 
 var allPossibleSets = allSets(filePathArray); 
 
 
@@ -170,7 +200,7 @@ export default function GameReducer(state = {
        if(action.type === 'NEW_GAME_EASY'){
          //console.log("easy game new reached reducer"); 
         return{
-          currentCardsOnEasyBoard: [...easyFilePathArray], 
+          currentCardsOnEasyBoard: [...drawEasyCards(12)], 
           currentCardsOnBoard: [],
           selectedCards: [],
           isCardNotClicked: true, 
@@ -212,7 +242,19 @@ export default function GameReducer(state = {
           isCardNotClicked: true, 
           allPossibleSets: [...allPossibleSets]
         }
-      } 
+      }else if(action.type === 'DRAW_EASY'){
+        return{
+          currentCardsOnEasyBoard: [...state.currentCardsOnEasyBoard, ...drawEasyCards(3)],
+          currentCardsOnBoard: [],
+          selectedCards: [],
+          isCardNotClicked: true, 
+          allPossibleEasySets:[...allPossibleEasySets]
+        }
+      } else if(action.type === 'DRAW_NORMAL'){
+        return{
+
+        }
+      }
       return state; 
   }
 
