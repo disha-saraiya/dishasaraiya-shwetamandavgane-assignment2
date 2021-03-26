@@ -24,11 +24,17 @@ export default function EasyGame(){
         //     </div>
         //     <Board cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>    
         // </div>
-
-        <div class = "game_grid">
-            <Board className = "grid_board" cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>
-            <ResetButton className = "grid_button" typeOfReset = {"easy"}/>
-            <Draw3 className = "grid_button" typeOfDraw = "easy" />
+<div class="wrapBoardButtons">
+        
+            
+        <div >
+            
+            <Board  cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>
+        </div>
+        <div class="temporary_div">
+                <ResetButton  typeOfReset = {"easy"}/>
+                <Draw3  typeOfDraw = "easy" />
+            </div>
         </div>
         )
 }

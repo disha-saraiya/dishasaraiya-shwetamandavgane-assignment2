@@ -132,7 +132,12 @@ function generateEasyFilePaths(cardArray){
   easyFilePathArray = generateEasyFilePaths(generate27Cards()); 
 
   var resultEasyArray = []; 
+
   function drawEasyCards(numberOfCards){
+    if(resultEasyArray.length >= 27){
+      alert("Please find sets within 27 cards on deck");
+      return resultEasyArray;
+    }
     for(var i=0; i<numberOfCards; i++){
       resultEasyArray.push(easyFilePathArray.pop()); 
     }
@@ -244,7 +249,7 @@ export default function GameReducer(state = {
         }
       }else if(action.type === 'DRAW_EASY'){
         return{
-          currentCardsOnEasyBoard: [...state.currentCardsOnEasyBoard, ...drawEasyCards(3)],
+          currentCardsOnEasyBoard: [...drawEasyCards(3)],
           currentCardsOnBoard: [],
           selectedCards: [],
           isCardNotClicked: true, 
