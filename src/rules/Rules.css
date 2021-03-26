@@ -2,18 +2,20 @@ h3 {
   color: black;
   text-align: center;
   font-size: 1.5em;
+  font-family: 'Yatra One', cursive;
+
 }
 
 p {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Yatra One', cursive;
   font-size: 1em;
   text-align: justify;
   padding: 1%;
   margin: 2%;
 }
 
-#game_rules {
-  border-radius: 2em;
+.game_rules {
+  /* border-radius: 2em;
   border-color: black;
   border-style: solid;
   word-wrap: break-word;
@@ -21,8 +23,11 @@ p {
   padding: 1%;
   position: fixed;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 400px;
+  left: 50%; */
+  border: 0.2em double dodgerblue; 
+  word-wrap: break-word; 
+  position: absolute; 
+  text-align: center;
+  align-items: center;
+  /* transform: translate(-30%, 5%);  */
 }

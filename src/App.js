@@ -8,27 +8,30 @@ import {
   BrowserRouter as Router,Switch, Route
 } from "react-router-dom";
 import Rules from './rules/Rules'; 
+import Home from './Home'; 
 
 
 function App(){
 
 //Reference for useEffect - https://www.pluralsight.com/guides/firing-redux-actions-on-route-transitions
+//Reference for React Router - https://www.freecodecamp.org/news/react-router-in-5-minutes/
+
 
   return (
-    <Router>
-      <div class="wrapper">
-        <h1> SET GAME </h1>
-        <div id = "first">
-          <button class="button"> <a href = "/"> Home </a></button>
-          <button class="button"> <a href = "/easy"> New Game - Easy </a> </button>
-          <button class="button"> <a href = "/medium"> New Game - Medium </a> </button>
-          <button class="button"> <a href = "/hard"> New Game - Hard </a> </button>
-          <button class="button"> <a href = "/rules"> Rules </a> </button> 
-        </div>  
-
-        <div id="second">
+      <div className = "wrapper">
+        <h1 className = "heading"> 🏝️🍍 ŠET for Summer 🍍🏝️ </h1>
+        <div className = "first">
+          <button className="button"> <a href = "/"> home </a></button>
+          <button className="button"> <a href = "/easy"> new game  eašy </a> </button>
+          <button className="button"> <a href = "/medium"> new game  međium </a> </button>
+          <button className="button"> <a href = "/hard"> new game  harđ </a> </button>
+          <button className="button"> <a href = "/rules"> ruleš </a> </button> 
+        </div> 
+       
+        <div className="second">
+        <Router>
           <Switch>
-          <Route path="/" component={App}>
+          <Route path="/" component={Home} exact />
               <Route path="/rules" >
                 <Rules />
               </Route>
@@ -41,11 +44,10 @@ function App(){
               <Route path="/hard">
                 <HardGame />
               </Route>
-          </Route>
-          </Switch>                
+          </Switch> 
+          </Router>    
      </div>
      </div>
-     </Router>
   )
 }
 
