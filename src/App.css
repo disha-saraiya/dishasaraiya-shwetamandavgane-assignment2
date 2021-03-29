@@ -57,3 +57,7 @@ a {
   color: black;
   text-decoration: none;
 }
+
+.home_container {
+  transform: translate(-10%, 5%);
+}

@@ -25,6 +25,11 @@
   position: fixed;
 }
 
+.buttonDiv {
+  display: inline-block;
+  margin-left: 120px;
+}
+/* 
 .game_grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -41,10 +46,5 @@
 .grid_button {
   grid-area: "grid-button";
   display: flex;
-  flex-direction: row;
-}
-
-span {
-  padding: 5%;
-  margin-bottom: 50%;
-}
+  flex-direction: column;
+} */

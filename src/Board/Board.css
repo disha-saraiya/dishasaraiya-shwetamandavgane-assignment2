@@ -3,7 +3,6 @@
   grid-template-columns: repeat(4, 1fr);
   border: 3px solid #333333;
   border-radius: 4% 4% 4% 4% / 4% 4% 4% 4%;
-  position: relative;
   margin: 3em;
   padding: 1%;
   position: relative;

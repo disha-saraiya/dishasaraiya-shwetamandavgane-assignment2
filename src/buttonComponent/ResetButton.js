@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import "./buttons.css";
-import {resetEasyGame, resetNormalGame, newGameEasy, newGame} from '../actions'; 
+import {resetEasyGame, resetNormalGame} from '../actions'; 
 import {useDispatch} from 'react-redux'; 
 
 
@@ -12,6 +12,6 @@ export default function ResetButton(props){
     }
 
     return(
-        <button onClick={() => dispatchGame()} class="resetButton"> Reset Game </button>
+        <button className = "resetButton" onClick={() => dispatchGame()}> Reset Game </button>
         )
 }

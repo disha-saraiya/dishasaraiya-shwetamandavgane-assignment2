@@ -17,16 +17,14 @@ export default function EasyGame(){
     }, [dispatch])
     
     return(
-        <div class="h-48 flex flex-wrap content-start flex-grow-1"> 
-         
-                   
-                    <div >
-                        <Board  cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>
-                    </div>
-                    <div >
-                        <ResetButton class="object-right-bottom"   typeOfReset = {"easy"}/>
-                        <Draw3 class="object-right-bottom" typeOfDraw = "easy" />
-                    </div>
+        <div className="wrapBoardButtons"> 
+        <div >       
+            <Board  cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>
+        </div>
+        <div className = "buttonDiv">
+        <ResetButton  typeOfReset = {"easy"}/>
+        <Draw3  typeOfDraw = "easy" />
+        </div>
         </div>
         )
 }

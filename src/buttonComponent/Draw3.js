@@ -14,6 +14,6 @@ export default function Draw3(props){
 
 
     return(
-        <button onClick = {() => dispatchGame()} class="resetButton"> Draw 3 Cards </button>
+        <button className = "drawButton" onClick = {() => dispatchGame()}> Draw 3 Cards </button>
         )
 }
