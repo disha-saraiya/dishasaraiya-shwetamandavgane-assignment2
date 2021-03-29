@@ -4,7 +4,7 @@ import {newGameEasy} from '../actions';
 import Board from '../Board/Board'; 
 import Draw3 from '../buttonComponent/Draw3';
 import ResetButton from '../buttonComponent/ResetButton';
-import "./game.css"
+import "./game.css";
 
 export default function EasyGame(){
 
@@ -16,12 +16,15 @@ export default function EasyGame(){
         dispatch(newGameEasy()); 
     }, [dispatch])
     
+
     return(
-        <div > 
-        <div >       
+        <div className = "container" > 
+
+        <div className = "row">       
             <Board  cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>
         </div>
-        <div >
+
+        <div  className = "row row-cols-2">
         <ResetButton  typeOfReset = {"easy"}/>
         <Draw3  typeOfDraw = "easy" />
         </div>

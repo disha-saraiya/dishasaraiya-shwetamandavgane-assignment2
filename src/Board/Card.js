@@ -2,15 +2,21 @@ import React from 'react';
 import './Card.css';
 import {useState} from 'react'; 
 import {useSelector} from 'react-redux'; 
+import  Bootbox  from  'bootbox-react';
 
 
 //Stringify : https://www.30secondsofcode.org/blog/s/javascript-array-comparison
+//Bootstrap bootbox alert: https://www.npmjs.com/package/bootbox-react
+
 
 function Card(props){
+
 
 const newGame = useSelector(state => state.newGame);
 
 const[isNotClicked, setIsNotClicked] = useState(true); 
+const[showAlert, setShowAlert] = useState(false); 
+const[isASetAlert, setIsASetAlert] = useState(true); 
 
 const toggleClick = () => {
     setIsNotClicked(!isNotClicked); 
@@ -24,8 +30,6 @@ const toggleClick = () => {
     }
     if(newGame.selectedCards.length === 3){
         console.log("3 cards clicked")
-        // console.log("all sets" +newGame.allPossibleEasySets); 
-        // console.log("selected cards" +newGame.selectedCards); 
         if(props.gameLevel === "easy"){
             let flag = false;     
             for(let i in newGame.allPossibleEasySets){
@@ -40,23 +44,28 @@ const toggleClick = () => {
                         (newGame.allPossibleEasySets[i][2]===newGame.selectedCards[0] 
                             || newGame.allPossibleEasySets[i][2]===newGame.selectedCards[1]
                             || newGame.allPossibleEasySets[i][2]===newGame.selectedCards[2])){
-                    //find proper way to display this
-                   // alert("this is a set"); 
-                    newGame.setsFound.push(newGame.selectedCards); 
-                    console.log(newGame.setsFound);
+                   newGame.setsFound.push([newGame.selectedCards[0], newGame.selectedCards[1],
+                    newGame.selectedCards[2]])
+                    newGame.currentCardsOnEasyBoard.splice(newGame.selectedCards[0],1); 
+                    newGame.currentCardsOnEasyBoard.splice(newGame.selectedCards[1],1); 
+                    newGame.currentCardsOnEasyBoard.splice(newGame.selectedCards[2],1); 
+
                     
                     while(newGame.selectedCards.length!==0) {
                            newGame.selectedCards.pop(); 
                     } 
-                    console.log("Selectedcards" + newGame.selectedCards);
                     flag = true;
                     break;
                 }else{
                     flag = false;
                 }
             }
-            if(flag === true) alert("Set formed");
-            else alert ("Form a new set");
+            if(flag === true) {
+                setShowAlert(!showAlert);
+                setIsASetAlert(true); 
+            }
+            else {setShowAlert(!showAlert); 
+                setIsASetAlert(false)};
         }else if(props.gameLevel === "medium" || props.gameLevel === "hard"){
             let flag = false;
             for(var k in newGame.allPossibleSets){
@@ -89,9 +98,30 @@ const toggleClick = () => {
 }
 
 
-let card_class = isNotClicked ? "card" : "card_clicked"; 
-return(
-            <img onClick = {toggleClick.bind(this)} className = {card_class} src = {props.imgLink} alt={props.imgLink}/>
+let card_class = isNotClicked ? "card" : "card_clicked";
+
+const handleYes = () => {
+    setShowAlert(false); 
+}
+
+const selectMessage =() => {
+    if(isASetAlert){
+        return "Set formed"; 
+    }else{
+        return "Not a set! Form a new set";
+    }
+}
+
+return( 
+            <div>
+            <img onClick = {toggleClick.bind(this)} 
+            className = {card_class} 
+            src = {props.imgLink} 
+            alt={props.imgLink}
+            />
+            <Bootbox  show = {showAlert} type = {"alert"} message = {selectMessage}  
+            onSuccess={handleYes}   onClose={handleYes} />
+            </div>
         )
 }
 export default Card; 

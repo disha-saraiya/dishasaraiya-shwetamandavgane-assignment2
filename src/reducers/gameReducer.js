@@ -192,7 +192,6 @@ var allPossibleEasySets = [];
 var easyFilePaths = []; 
 //Make the 27 file paths 
 easyFilePaths = generateEasyFilePaths(generate27Cards());
-console.log("Easy fiel paths - " + easyFilePaths);
 allPossibleEasySets = allSets(easyFilePaths); 
 var allPossibleSets = allSets(normalFilePathArray); 
 
@@ -206,11 +205,12 @@ export default function GameReducer(state = {
        if(action.type === 'NEW_GAME_EASY'){
         return{
           currentCardsOnEasyBoard: [...drawEasyCards(12, firstTimeEasyArray)], 
-          selectedCards: [],
+          selectedCards: [...state.selectedCards],
           isCardNotClicked: true, 
-          setsFound:[],
+          setsFound:[...state.setsFound],
           allPossibleEasySets:[...allPossibleEasySets]
         }
+      
       }else if(action.type === 'DRAW_EASY'){
         return{
           currentCardsOnEasyBoard: [...drawEasyCards(3, firstTimeEasyArray)],

@@ -18,17 +18,17 @@ function App(){
 
 
   return (
-      <div className = "wrapper">
+      <div className = "container">
         <h1 className = "heading"> 🏝️🍍 ŠET for Summer 🍍🏝️ </h1>
-        <div className = "first">
-          <button className="button"> <a href = "/"> home </a></button>
-          <button className="button"> <a href = "/easy"> new game  eašy </a> </button>
-          <button className="button"> <a href = "/medium"> new game  međium </a> </button>
-          <button className="button"> <a href = "/hard"> new game  harđ </a> </button>
-          <button className="button"> <a href = "/rules"> ruleš </a> </button> 
+        <div className = "row row-cols-5">
+          <button className="button col-sm"> <a href = "/"> home </a></button>
+          <button className="button com-sm"> <a href = "/easy"> new game  eašy </a> </button>
+          <button className="button col-sm"> <a href = "/medium"> new game  međium </a> </button>
+          <button className="button col-sm"> <a href = "/hard"> new game  harđ </a> </button>
+          <button className="button col-sm"> <a href = "/rules"> ruleš </a> </button> 
         </div> 
        
-        <div >
+        <div className = "row">
         <Router>
           <Switch>
           <Route path="/" component={Home} exact />

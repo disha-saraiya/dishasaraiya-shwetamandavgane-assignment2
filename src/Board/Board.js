@@ -4,10 +4,16 @@ import "./Board.css"
 
 function Board(props){
     return(
-        <div id="board">
+        <div className="container">
+            <div className = "row row-cols-4">
             {props.cardsArray.map((e)  => {
-                return <Card gameLevel = {props.gameLevel} imgLink = {e}/> 
+                
+                return (
+                <div  className="col-sm-4">
+                <Card gameLevel = {props.gameLevel} imgLink = {e}/> 
+                </div> )
             })}
+            </div>
         </div>
     )
 }

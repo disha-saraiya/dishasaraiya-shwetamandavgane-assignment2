@@ -1,4 +1,4 @@
-#board {
+/* #board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border: 3px solid #333333;
@@ -14,4 +14,4 @@
   width: auto;
   float: right;
   height: auto;
-}
+} */
