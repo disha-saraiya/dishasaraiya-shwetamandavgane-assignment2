@@ -38,10 +38,10 @@ const toggleClick = () => {
     //         //do something for easy game
     //     }
     // }
-
     if(newGame.selectedCards.length === 3){
-        console.log("3 cards clicked")
-        if(props.gameLevel === "easy"){     
+        if(props.gameLevel === "easy"){         
+            console.log(newGame.selectedCards); 
+            console.log(newGame.allPossibleEasySets); 
             for(var i in newGame.allPossibleEasySets){
                 if(JSON.stringify(newGame.allPossibleEasySets[i])===JSON.stringify(newGame.selectedCards)){
                     //find proper way to display this

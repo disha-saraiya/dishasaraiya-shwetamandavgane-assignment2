@@ -5,6 +5,17 @@
   height: fit-content;
   width: fit-content;
   margin-top: 0px;
+  float: left;
+  margin-bottom: 50px;
+}
+
+.wrapBoard {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  height: 70%;
+  width: 50%;
+  margin-top: 0px;
   margin-bottom: 50px;
 }
 
@@ -30,5 +41,10 @@
 .grid_button {
   grid-area: "grid-button";
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+span {
+  padding: 5%;
+  margin-bottom: 50%;
 }

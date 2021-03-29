@@ -203,7 +203,7 @@ export default function GameReducer(state = {
           currentCardsOnEasyBoard: [...drawEasyCards(12, firstTimeEasyArray)], 
           selectedCards: [],
           isCardNotClicked: true, 
-          allPossibleEasySets:[...allPossibleEasySets]
+          allPossibleEasySets:[state.allPossibleEasySets]
         }
       }else if(action.type === 'DRAW_EASY'){
         return{

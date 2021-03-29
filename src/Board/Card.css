@@ -1,6 +1,6 @@
 .card {
-  height: 120px;
-  width: 120px;
+  height: 90px;
+  width: 90px;
 }
 
 .card:hover {
@@ -10,8 +10,8 @@
 }
 
 .card_clicked {
-  height: 120px;
-  width: 120px;
+  height: 90px;
+  width: 90px;
   box-shadow: rgba(89, 0, 255, 0.377) 0px 30px 60px -12px inset,
     rgba(21, 0, 206, 0.3) 0px 18px 36px -18px inset;
 }

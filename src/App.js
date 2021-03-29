@@ -28,7 +28,7 @@ function App(){
           <button className="button"> <a href = "/rules"> ruleš </a> </button> 
         </div> 
        
-        <div className="second">
+        <div >
         <Router>
           <Switch>
           <Route path="/" component={Home} exact />
