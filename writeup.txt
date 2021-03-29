@@ -1,0 +1,52 @@
+Writeup: 
+
+Welcome to SET for Summer, instructors! 
+We have designed the traditional set game, but we have given it a funky summer theme - the cards are all tropical 
+shades of blue and green. 
+Below are the answers to some questions given on the submission, and below that, the references for this project have
+all been stated in one place. 
+
+Submitted by: Disha Saraiya, Shweta Mandavgane 
+
+1) Challenges that we faced making this application: 
+-> Algorithms! The algorithm for this game was very complicated. Implemeting the algorithm with the help of
+   redux was even more complicated because a lot of the logic is easy when implemented in one flow (i.e one file). 
+   With redux, we had to carefully do everything with the help of reducers. 
+-> Making the logic isolated. A LOT of functions are interrelated to each other, and due to React's and Redux's
+   unidirectional flow (i.e from parent -> child), it was difficult to implement features like unselecting cards 
+   that were a set, changing the class of the card, etc. 
+-> Designing the application with CSS was difficult, so we switched to Bootstrap. 
+-> Using SVG to design the icons. 
+
+2) Work to do if given more time:
+-> Definitely work on algorithm optimization. We spent most of our time figuring out the algorithm, which 
+   is why it looks shabby and cluttered right now. Given more time, we would definitely clean the code up, optimize
+   the algorithm, isolate each function and action and build a sleeker application. 
+-> A more responsive and adaptive UI that fits on all screen sizes and devices. 
+
+3) Assumptions made while working on the assignment:
+-> All logic fits into one reducer i.e the gameReducer. Different actions isolate the functions, but everything
+   is combined within one reducer.
+-> The game will be accesed on a laptop or tablet, since it is a web application. 
+-> Those who want to contribute to the assignment (on Github) will not want to contribute to the SVG icons. Hence, 
+   we have not included the Haskell programming files in the icons. 
+
+4) Time alloted to the assignment:
+Took 4 weeks and 6 hours of work daily. We pair programmed for most of the project. 
+
+
+Project references (all code references are cited in code): 
+
+useEffect - https://www.pluralsight.com/guides/firing-redux-actions-on-route-transitions
+React Router - https://www.freecodecamp.org/news/react-router-in-5-minutes/
+JSON Stringify : https://www.30secondsofcode.org/blog/s/javascript-array-comparison
+Bootbox for alerts: https://www.npmjs.com/package/bootbox-react
+https://archives.haskell.org/projects.haskell.org/diagrams/doc/manual.html?ref=driverlayer.com/web#creating-2d-diagrams 
+https://archives.haskell.org/projects.haskell.org/diagrams/doc/manual.html?ref=driverlayer.com/web#texture
+https://wiki.haskell.org/Colour 
+https://www.w3schools.com/css/css_border.asp and other w3schools articles
+
+
+Note: 
+There was an error while writing our Haskell code to generate SVG, we gave the color name 'red' by mistake.
+We apologize for this since there is no red card. Red means turquoise. 

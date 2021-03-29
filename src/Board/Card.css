@@ -1,17 +1,24 @@
  .card {
   height: 120px;
   width: 120px;
+  background-color: transparent !important;
+  border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%,
+   #b8fd33 50%, #fec837 75%, #fd1892 100%);
+  border: 1px solid; 
+  margin: 5px 5px; 
 }
 
-/*.card:hover {
+.card:hover {
   box-shadow: rgba(89, 0, 255, 0.377) 0px 0px 0px 2px,
     rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
     rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
 .card_clicked {
-  height: 90px;
-  width: 90px;
+  height: 120px;
+  width: 120px;
   box-shadow: rgba(89, 0, 255, 0.377) 0px 30px 60px -12px inset,
-    rgba(21, 0, 206, 0.3) 0px 18px 36px -18px inset;
-} */
+    rgba(2, 248, 2, 0.3) 0px 18px 36px -18px inset;
+  margin: 5px 5px; 
+
+}

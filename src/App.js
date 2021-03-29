@@ -13,22 +13,17 @@ import Home from './Home';
 
 function App(){
 
-//Reference for useEffect - https://www.pluralsight.com/guides/firing-redux-actions-on-route-transitions
-//Reference for React Router - https://www.freecodecamp.org/news/react-router-in-5-minutes/
-
-
   return (
       <div className = "container">
-        <h1 className = "heading"> 🏝️🍍 ŠET for Summer 🍍🏝️ </h1>
+        <h1 className = "heading text-center fs-1"> 🏝️🍍 ŠET for Summer 🍍🏝️ </h1>
         <div className = "row row-cols-5">
-          <button className="button col-sm"> <a href = "/"> home </a></button>
-          <button className="button com-sm"> <a href = "/easy"> new game  eašy </a> </button>
-          <button className="button col-sm"> <a href = "/medium"> new game  međium </a> </button>
-          <button className="button col-sm"> <a href = "/hard"> new game  harđ </a> </button>
-          <button className="button col-sm"> <a href = "/rules"> ruleš </a> </button> 
+          <button className="btn btn-outline-dark col-sm"> <a href = "/"> home </a></button>
+          <button className="btn btn-outline-dark com-sm"> <a href = "/easy"> new game  eašy </a> </button>
+          <button className="btn btn-outline-dark col-sm"> <a href = "/medium"> new game  međium </a> </button>
+          <button className="btn btn-outline-dark col-sm"> <a href = "/hard"> new game  harđ </a> </button>
+          <button className="btn btn-outline-dark col-sm"> <a href = "/rules"> ruleš </a> </button> 
         </div> 
        
-        <div className = "row">
         <Router>
           <Switch>
           <Route path="/" component={Home} exact />
@@ -45,8 +40,7 @@ function App(){
                 <HardGame />
               </Route>
           </Switch> 
-          </Router>    
-     </div>
+          </Router>   
      </div>
   )
 }

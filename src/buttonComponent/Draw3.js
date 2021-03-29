@@ -14,6 +14,6 @@ export default function Draw3(props){
 
 
     return(
-        <button className = "drawButton" onClick = {() => dispatchGame()}> Draw 3 Cards </button>
+        <button className="game_btn btn-outline-dark" onClick = {() => dispatchGame()}> Draw 3 Cards </button>
         )
 }

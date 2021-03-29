@@ -12,6 +12,6 @@ export default function ResetButton(props){
     }
 
     return(
-        <button className = "resetButton" onClick={() => dispatchGame()}> Reset Game </button>
+        <button className="game_btn btn-outline-dark" onClick={() => dispatchGame()}> Reset Game </button>
         )
 }

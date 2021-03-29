@@ -1,10 +1,9 @@
 import React from 'react';
-import './Rules.css';
 
 function Rules () {
     return(            
-			<div className = "game_rules">
-			<h3>General rules</h3>
+			<div className = "home_container">
+			<h3><b>General rules</b></h3>
 				<p>Welcome to SET for Summer! </p> 
 				<p>The object of the game is to identify a 'SET' of three cards
 					from 12 cards laid out on the table. Each card has a variation of the following 
@@ -24,12 +23,12 @@ function Rules () {
 				same on each card OR is different on each card. That is to say, any feature 
 				in the 'Set' of three cards is either common to all three cards or is different on each card.
 				</p>
-			<h3>Buttons to help you </h3>
+			<h3><b>Buttons to help you </b></h3>
 				<p> <b>RESET:</b> The reset button will automatically reset your board and give you new playing cards</p>
 				<p><b>DRAW 3: </b> This button will draw three more cards to your board, in case you cannot find sets on the
 					existing board.
 				</p>
-			<h3> Game levels </h3>
+			<h3> <b>Game levels</b></h3>
 				<p><b>Easy(aka SET Junior):</b> The easy game has no shape variations. All cards will be triangle cards. 
 					You only have to match on the basis of three features - color, number, shading :) 
 				</p>

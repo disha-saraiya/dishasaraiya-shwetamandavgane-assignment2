@@ -19,14 +19,10 @@ export default function EasyGame(){
 
     return(
         <div className = "container" > 
-
-        <div className = "row">       
-            <Board  cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>
-        </div>
-
-        <div  className = "row row-cols-2">
-        <ResetButton  typeOfReset = {"easy"}/>
-        <Draw3  typeOfDraw = "easy" />
+        <div className = "row">   
+            <div className = "col-sm-1"><Draw3 typeOfDraw = "easy" /></div>  
+            <div className = "col-lg-10"> <Board cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/></div> 
+            <div className = "col-sm-1"><ResetButton typeOfReset = {"easy"}/></div> 
         </div>
         </div>
         )

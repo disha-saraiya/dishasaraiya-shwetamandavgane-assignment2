@@ -1,17 +1,9 @@
-/* #board {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border: 3px solid #333333;
-  border-radius: 4% 4% 4% 4% / 4% 4% 4% 4%;
-  margin: 3em;
-  padding: 1%;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 400px;
-  min-height: 400px;
-  width: auto;
-  float: right;
-  height: auto;
-} */
+.board {
+  /* Border inspiration: https://codepen.io/unnegative/pen/dVwYBq */
+  border: 3px double transparent;
+  border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%,
+   #b8fd33 50%, #fec837 75%, #fd1892 100%);
+  border-image-slice: 1;
+  margin: 10px 10px; 
+  
+}

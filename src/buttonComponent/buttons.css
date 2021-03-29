@@ -1,19 +1,15 @@
-  /* .resetButton, .drawButton{
-    background-color: transparent;
-    color: black;
-    font-size: 15px;
-    padding: 5px 35px;
-    border-radius: 5px;
-    margin: 1px 10px; 
-    cursor: pointer;
-    display: inline-block; 
-    font-family: 'Yatra One', cursive;
-  }
+.game_btn{
+  background-color: transparent;
+  font-size: 15px;
+  color: black; 
+  border-radius: 5px;
+  margin: 10px 5px;
+  cursor: pointer;
+  font-family: "Yatra One", cursive;
+  min-height: 100px; 
+  min-width: 100px;
+}
 
-  .resetButton:hover{
-    background-color:aliceblue; 
-  }
-
-  .drawButton:hover{
-    background-color:aliceblue; 
-  } */
+button{
+  color: black  !important; 
+}

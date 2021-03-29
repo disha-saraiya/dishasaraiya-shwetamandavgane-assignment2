@@ -4,11 +4,6 @@ import {useState} from 'react';
 import {useSelector} from 'react-redux'; 
 import  Bootbox  from  'bootbox-react';
 
-
-//Stringify : https://www.30secondsofcode.org/blog/s/javascript-array-comparison
-//Bootstrap bootbox alert: https://www.npmjs.com/package/bootbox-react
-
-
 function Card(props){
 
 
