@@ -4,6 +4,8 @@ import {newGameMedium} from '../actions';
 import Board from '../Board/Board'; 
 import Draw3 from '../buttonComponent/Draw3';
 import ResetButton from '../buttonComponent/ResetButton';
+import "./game.css"
+
 
 
 export default function MediumGame(){
@@ -17,12 +19,14 @@ export default function MediumGame(){
     }, [dispatch])
 
     return(
-        <div>
-            <div class = "wrapBoardButtons"> 
-                <ResetButton typeOfReset = {"normal"}/>
-                <Draw3 />
+        <div className = "wrapBoardButtons">
+            <div>
+                <Board cardsArray = {newGame.currentCardsOnBoard}  gameLevel="medium"/>
             </div>
-            <Board cardsArray = {newGame.currentCardsOnBoard}  gameLevel="medium"/>
+            <div className = "buttonDiv">
+                <ResetButton typeOfReset = "normal" />
+                <Draw3 typeOfDraw = "medium" />
+            </div>
         </div>
     )
 

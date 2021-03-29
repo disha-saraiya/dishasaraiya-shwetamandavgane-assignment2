@@ -22,30 +22,19 @@ const toggleClick = () => {
         var index = newGame.selectedCards.indexOf(props.imgLink);
         newGame.selectedCards.splice(index,1); 
     }
-
-    // var allPossibleEasySets = []
-    // allPossibleEasySets = newGame.allPossibleEasySets; 
-
-    // if(newGame.selectedCards.length === 3 ){
-    //     if(props.gameLevel === "easy"){
-    //         console.log(newGame.selectedCards); 
-    //         console.log(newGame.allPossibleEasySets); 
-    //         if(allPossibleEasySets.includes([newGame.selectedCards[0],newGame.selectedCards[1],newGame.selectedCards[2]])){
-    //             console.log("this is a set"); 
-    //         }else{
-    //             console.log("this is not a set"); 
-    //         }
-    //         //do something for easy game
-    //     }
-    // }
-
     if(newGame.selectedCards.length === 3){
         console.log("3 cards clicked")
+        // console.log("all sets" +newGame.allPossibleEasySets); 
+        // console.log("selected cards" +newGame.selectedCards); 
         if(props.gameLevel === "easy"){     
-            for(var i in newGame.allPossibleEasySets){
+            for(let i in newGame.allPossibleEasySets){
+                console.log(newGame.allPossibleEasySets)
+                console.log(newGame.selectedCards)
                 if(JSON.stringify(newGame.allPossibleEasySets[i])===JSON.stringify(newGame.selectedCards)){
                     //find proper way to display this
                     alert("this is a set"); 
+                    newGame.setsFound.push(newGame.selectedCards); 
+                    console.log(newGame.setsFound); 
                     break;
                 }else{
                     alert("this is not a set"); 
@@ -53,11 +42,12 @@ const toggleClick = () => {
                 }
             }
         }else if(props.gameLevel === "medium" || props.gameLevel === "hard"){
-            for(var i in newGame.allPossibleSets){
-                console.log(newGame.allPossibleSets); 
-                console.log(newGame.selectedCards); 
-                if(JSON.stringify(newGame.allPossibleSets[i])===JSON.stringify(newGame.selectedCards)){
+            for(var k in newGame.allPossibleSets){
+                if(JSON.stringify(newGame.allPossibleSets[k])===JSON.stringify(newGame.selectedCards)){
                     alert("this is a set"); 
+                    //If the three selected cards are a set, then add them to the setsFound[] array,
+                    //discard them from the board, and draw three more cards. 
+
                     break;
                 }else{
                     alert("this is not a set"); 
@@ -67,6 +57,7 @@ const toggleClick = () => {
         }
     }
 }
+
 let card_class = isNotClicked ? "card" : "card_clicked"; 
 return(
             <img onClick = {toggleClick.bind(this)} className = {card_class} src = {props.imgLink} alt={props.imgLink}/>

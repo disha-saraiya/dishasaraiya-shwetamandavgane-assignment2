@@ -188,14 +188,18 @@ const allSets = (filePaths) => {
   return result;
 }
 
-var allPossibleEasySets = allSets(easyFilePathArray); 
+var allPossibleEasySets = []; 
+var easyFilePaths = []; 
+//Make the 27 file paths 
+easyFilePaths = generateEasyFilePaths(generate27Cards());
+allPossibleEasySets = allSets(easyFilePaths); 
 var allPossibleSets = allSets(normalFilePathArray); 
 
 // ----------------------------------------------------- Game reducer ---------------------------------------------------------
 
 export default function GameReducer(state = {
-  currentCardsOnBoard : [], currentCardsOnEasyBoard: [], selectedCards:[], areSetCards:[], isCardNotClicked: true, 
-  allPossibleEasySets:[], allPossibleSets:[]
+  currentCardsOnBoard : [], currentCardsOnEasyBoard: [], selectedCards:[], setsFound:[], 
+  isCardNotClicked: true, allPossibleEasySets:[], allPossibleSets:[]
 }, action){
   
        if(action.type === 'NEW_GAME_EASY'){

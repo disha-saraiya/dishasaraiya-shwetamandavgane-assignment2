@@ -4,6 +4,8 @@ import {newGameHard} from '../actions';
 import Board from '../Board/Board'; 
 import Draw3 from '../buttonComponent/Draw3';
 import ResetButton from '../buttonComponent/ResetButton';
+import "./game.css"
+
 
 
 export default function HardGame(){
@@ -16,12 +18,14 @@ export default function HardGame(){
       }, [dispatch]);
     
     return(
-        <div>
-        <div class = "wrapBoardButtons">     
-            <ResetButton typeOfReset = {"normal"}/>
-            <Draw3 />
-        </div>
-        <Board cardsArray = {newGame.currentCardsOnBoard}  gameLevel="hard"/>
+        <div className = "wrapBoardButtons">
+            <div>
+                <Board cardsArray = {newGame.currentCardsOnBoard}  gameLevel="hard"/>
+            </div>
+            <div className = "buttonDiv">
+                <ResetButton typeOfReset = "normal" />
+                <Draw3 typeOfDraw = "hard" />
+            </div>
         </div>
     )
 

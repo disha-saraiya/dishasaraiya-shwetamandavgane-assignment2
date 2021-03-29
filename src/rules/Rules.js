@@ -41,79 +41,8 @@ function Rules () {
 					new cards if there are no sets on the current board. 
 				</p>
 			</div>
-		
-			/* <h4>Examples of sets: </h4>
-1) <b>color:</b> different on each card, <b>symbol:</b> the same on each card (oval), <b>number:</b> the same on each (two), <b>shading:</b> the same on each card (solid)
-<table class="small"><tbody><tr>
-    <td class="card">
-    	    	<img class="card_sign small" src="/images/oval_solid_blue.png" alt="oval solid blue 2 ">
-    	<br>
-    	    	<img class="card_sign small" src="/images/oval_solid_blue.png" alt="oval solid blue 2 ">
-    	<br>
-    	    </td>
-    <td class="card">
-    	    	<img class="card_sign small" src="/images/oval_solid_red.png" alt="oval solid red 2 ">
-
-    	<br>
-    	    	<img class="card_sign small" src="/images/oval_solid_red.png" alt="oval solid red 2 ">
-    	<br>
-    	    </td>
-    <td class="card">
-    	    	<img class="card_sign small" src="/images/oval_solid_green.png" alt="oval solid green 2 ">
-    	<br>
-    	    	<img class="card_sign small" src="/images/oval_solid_green.png" alt="oval solid green 2 ">
-    	<br>
-
-    	    </td>
-</tr></tbody></table>2) <b>color:</b> different on each card, <b>symbol:</b> different on each card, <b>number:</b> different on each card, <b>shading:</b> different on each card
-<table class="small"><tbody><tr>
-    <td class="card">
-    	    	<img class="card_sign small" src="/images/diamond_striped_blue.png" alt="diamond striped blue 2 ">
-    	<br>
-    	    	<img class="card_sign small" src="/images/diamond_striped_blue.png" alt="diamond striped blue 2 ">
-    	<br>
-    	    </td>
-    <td class="card">
-    	    	<img class="card_sign small" src="/images/squiggle_solid_red.png" alt="squiggle solid red 1 ">
-
-    	<br>
-    	    </td>
-    <td class="card">
-    	    	<img class="card_sign small" src="/images/oval_open_green.png" alt="oval open green 3 ">
-    	<br>
-    	    	<img class="card_sign small" src="/images/oval_open_green.png" alt="oval open green 3 ">
-    	<br>
-    	    	<img class="card_sign small" src="/images/oval_open_green.png" alt="oval open green 3 ">
-    	<br>
-
-    	    </td>
-</tr></tbody></table>
-
-3) <b>color:</b> the same on each card (green), <b>symbol:</b> the same on each card (diamond), <b>number:</b> different on each card, <b>shading:</b> different on each card
-<table class="small"><tbody><tr>
-    <td class="card">
-    	    	<img class="card_sign small" src="/images/diamond_solid_green.png" alt="diamond solid green 2 ">
-    	<br>
-    	    	<img class="card_sign small" src="/images/diamond_solid_green.png" alt="diamond solid green 2 ">
-    	<br>
-    	    </td>
-    <td class="card">
-    	    	<img class="card_sign small" src="/images/diamond_striped_green.png" alt="diamond striped green 3 ">
-
-    	<br>
-    	    	<img class="card_sign small" src="/images/diamond_striped_green.png" alt="diamond striped green 3 ">
-    	<br>
-    	    	<img class="card_sign small" src="/images/diamond_striped_green.png" alt="diamond striped green 3 ">
-    	<br>
-    	    </td>
-    <td class="card">
-    	    	<img class="card_sign small" src="/images/diamond_open_green.png" alt="diamond open green 1 ">
-    	<br>
-
-    	    </td>
-</tr></tbody></table> */
-
-        )
+				
+	)
 }
 
 export default Rules; 
