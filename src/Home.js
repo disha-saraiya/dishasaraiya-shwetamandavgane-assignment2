@@ -10,7 +10,7 @@ function Home(){
             <h3> SET: A real time card game designed by Marsha Falco in 1974 </h3>
             <h3> The deck consists of 81 unique cards that vary in four features across three 
                 possibilities for each kind of feature: number of shapes, shape, shading, and color.</h3>
-            <h3> Players: 1+ </h3>
+            <h3> Players: 1 </h3>
             <br /> <br />
 
             <h6 className = "text-muted"> Developed by: Shweta Mandavgane and Disha Saraiya </h6>

@@ -6,7 +6,7 @@ shades of blue and green.
 Below are the answers to some questions given on the submission, and below that, the references for this project have
 all been stated in one place. 
 
-Submitted by: Disha Saraiya, Shweta Mandavgane 
+Submitted by (and written together by): Disha Saraiya, Shweta Mandavgane 
 
 1) Challenges that we faced making this application: 
 -> Algorithms! The algorithm for this game was very complicated. Implemeting the algorithm with the help of
@@ -24,12 +24,14 @@ Submitted by: Disha Saraiya, Shweta Mandavgane
    the algorithm, isolate each function and action and build a sleeker application. 
 -> A more responsive and adaptive UI that fits on all screen sizes and devices. 
 
-3) Assumptions made while working on the assignment:
+3) Assumptions/clarifications made while working on the assignment:
 -> All logic fits into one reducer i.e the gameReducer. Different actions isolate the functions, but everything
    is combined within one reducer.
 -> The game will be accesed on a laptop or tablet, since it is a web application. 
 -> Those who want to contribute to the assignment (on Github) will not want to contribute to the SVG icons. Hence, 
    we have not included the Haskell programming files in the icons. 
+-> This is a single page application and we have used React Router to render components. We are swapping out 
+   components. 
 
 4) Time alloted to the assignment:
 Took 4 weeks and 6 hours of work daily. We pair programmed for most of the project. 

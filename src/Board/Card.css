@@ -2,10 +2,7 @@
   height: 120px;
   width: 120px;
   background-color: transparent !important;
-  border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%,
-   #b8fd33 50%, #fec837 75%, #fd1892 100%);
-  border: 1px solid; 
-  margin: 5px 5px; 
+  margin: 0.8rem; 
 }
 
 .card:hover {
@@ -19,6 +16,5 @@
   width: 120px;
   box-shadow: rgba(89, 0, 255, 0.377) 0px 30px 60px -12px inset,
     rgba(2, 248, 2, 0.3) 0px 18px 36px -18px inset;
-  margin: 5px 5px; 
-
+  margin: 0.8rem; 
 }

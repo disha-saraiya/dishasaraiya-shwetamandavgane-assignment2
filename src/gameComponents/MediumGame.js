@@ -19,15 +19,13 @@ export default function MediumGame(){
     }, [dispatch])
 
     return(
-        <div className = "wrapBoardButtons">
-            <div>
-                <Board cardsArray = {newGame.currentCardsOnBoard}  gameLevel="medium"/>
-            </div>
-            <div className = "buttonDiv">
-                <ResetButton typeOfReset = "normal" />
-                <Draw3 typeOfDraw = "medium" />
-            </div>
-        </div>
+    <div className = "container" > 
+    <div className = "row">   
+        <div className = "col-sm-1"><Draw3 typeOfDraw = "medium" /></div>  
+        <div className = "col-lg-10"> <Board cardsArray = {newGame.currentCardsOnBoard} gameLevel="medium"/></div> 
+        <div className = "col-sm-1"><ResetButton typeOfReset = {"medium"}/></div> 
+    </div>
+    </div>
     )
 
 }

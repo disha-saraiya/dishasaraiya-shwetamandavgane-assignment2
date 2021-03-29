@@ -164,7 +164,7 @@ function generateAllCards(){
         }
     }
     
-    if(flag[0] === true && flag [1] === true  && flag[2] === true && flag[3] === true){
+    if(flag[0] === true && flag[1] === true && flag[2] === true && flag[3] === true){
         return true;
     }else{
         return false;

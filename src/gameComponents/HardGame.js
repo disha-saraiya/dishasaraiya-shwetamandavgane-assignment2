@@ -18,15 +18,12 @@ export default function HardGame(){
       }, [dispatch]);
     
     return(
-        <div className = "wrapBoardButtons">
-            <div>
-                <Board cardsArray = {newGame.currentCardsOnBoard}  gameLevel="hard"/>
-            </div>
-            <div className = "buttonDiv">
-                <ResetButton typeOfReset = "normal" />
-                <Draw3 typeOfDraw = "hard" />
-            </div>
-        </div>
+    <div className = "container" > 
+    <div className = "row">   
+        <div className = "col-sm-1"><Draw3 typeOfDraw = "hard" /></div>  
+        <div className = "col-lg-10"> <Board cardsArray = {newGame.currentCardsOnBoard} gameLevel="hard"/></div> 
+        <div className = "col-sm-1"><ResetButton typeOfReset = {"normal"}/></div> 
+    </div>
+    </div>
     )
-
 }

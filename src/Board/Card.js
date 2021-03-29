@@ -15,7 +15,6 @@ const[isASetAlert, setIsASetAlert] = useState(true);
 
 const toggleClick = () => {
     setIsNotClicked(!isNotClicked); 
-    //newGame.isCardNotClicked = !newGame.isCardNotClicked
 
     if(isNotClicked){
         newGame.selectedCards.push(props.imgLink);
@@ -45,7 +44,6 @@ const toggleClick = () => {
                     newGame.currentCardsOnEasyBoard.splice(newGame.selectedCards[1],1); 
                     newGame.currentCardsOnEasyBoard.splice(newGame.selectedCards[2],1); 
 
-                    
                     while(newGame.selectedCards.length!==0) {
                            newGame.selectedCards.pop(); 
                     } 
@@ -86,8 +84,14 @@ const toggleClick = () => {
                     flag = false;
                 }
             }
-            if(flag === true) alert("Set formed");
-            else alert ("Form a new set");
+            if(flag === true){
+                setShowAlert(!showAlert);
+                setIsASetAlert(true); 
+            }
+            else{
+                setShowAlert(!showAlert); 
+                setIsASetAlert(false)
+            } 
         }
     }
 }
@@ -114,7 +118,7 @@ return(
             src = {props.imgLink} 
             alt={props.imgLink}
             />
-            <Bootbox  show = {showAlert} type = {"alert"} message = {selectMessage}  
+            <Bootbox  show = {showAlert} type = {"alert"} message = {selectMessage()}  
             onSuccess={handleYes}   onClose={handleYes} />
             </div>
         )
