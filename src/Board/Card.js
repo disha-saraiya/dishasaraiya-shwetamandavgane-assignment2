@@ -26,37 +26,68 @@ const toggleClick = () => {
         console.log("3 cards clicked")
         // console.log("all sets" +newGame.allPossibleEasySets); 
         // console.log("selected cards" +newGame.selectedCards); 
-        if(props.gameLevel === "easy"){     
+        if(props.gameLevel === "easy"){
+            let flag = false;     
             for(let i in newGame.allPossibleEasySets){
-                console.log(newGame.allPossibleEasySets)
-                console.log(newGame.selectedCards)
-                if(JSON.stringify(newGame.allPossibleEasySets[i])===JSON.stringify(newGame.selectedCards)){
+                
+                if((newGame.allPossibleEasySets[i][0]===newGame.selectedCards[0] 
+                    || newGame.allPossibleEasySets[i][0]===newGame.selectedCards[1]
+                    || newGame.allPossibleEasySets[i][0]===newGame.selectedCards[2])
+                    &&
+                    (newGame.allPossibleEasySets[i][1]===newGame.selectedCards[0] 
+                        || newGame.allPossibleEasySets[i][1]===newGame.selectedCards[1]
+                        || newGame.allPossibleEasySets[i][1]===newGame.selectedCards[2]) &&
+                        (newGame.allPossibleEasySets[i][2]===newGame.selectedCards[0] 
+                            || newGame.allPossibleEasySets[i][2]===newGame.selectedCards[1]
+                            || newGame.allPossibleEasySets[i][2]===newGame.selectedCards[2])){
                     //find proper way to display this
-                    alert("this is a set"); 
+                   // alert("this is a set"); 
                     newGame.setsFound.push(newGame.selectedCards); 
-                    console.log(newGame.setsFound); 
+                    console.log(newGame.setsFound);
+                    
+                    while(newGame.selectedCards.length!==0) {
+                           newGame.selectedCards.pop(); 
+                    } 
+                    console.log("Selectedcards" + newGame.selectedCards);
+                    flag = true;
                     break;
                 }else{
-                    alert("this is not a set"); 
-                    break;
+                    flag = false;
                 }
             }
+            if(flag === true) alert("Set formed");
+            else alert ("Form a new set");
         }else if(props.gameLevel === "medium" || props.gameLevel === "hard"){
+            let flag = false;
             for(var k in newGame.allPossibleSets){
-                if(JSON.stringify(newGame.allPossibleSets[k])===JSON.stringify(newGame.selectedCards)){
-                    alert("this is a set"); 
-                    //If the three selected cards are a set, then add them to the setsFound[] array,
-                    //discard them from the board, and draw three more cards. 
-
-                    break;
-                }else{
-                    alert("this is not a set"); 
-                    break;
+                if((newGame.allPossibleSets[k][0]===newGame.selectedCards[0] 
+                    || newGame.allPossibleSets[k][0]===newGame.selectedCards[1]
+                    || newGame.allPossibleSets[k][0]===newGame.selectedCards[2])
+                    &&
+                    (newGame.allPossibleSets[k][1]===newGame.selectedCards[0] 
+                        || newGame.allPossibleSets[k][1]===newGame.selectedCards[1]
+                        || newGame.allPossibleSets[k][1]===newGame.selectedCards[2]) 
+                    &&
+                    (newGame.allPossibleSets[k][2]===newGame.selectedCards[0] 
+                        || newGame.allPossibleSets[k][2]===newGame.selectedCards[1]
+                        || newGame.allPossibleSets[k][2]===newGame.selectedCards[2]))
+                {
+                                newGame.setsFound.push(newGame.selectedCards); 
+                                console.log(newGame.setsFound);
+                                newGame.selectedCards = []; 
+                                flag = true;
+                                break;
+                } 
+                else{
+                    flag = false;
                 }
             }
+            if(flag === true) alert("Set formed");
+            else alert ("Form a new set");
         }
     }
 }
+
 
 let card_class = isNotClicked ? "card" : "card_clicked"; 
 return(

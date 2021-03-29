@@ -192,6 +192,7 @@ var allPossibleEasySets = [];
 var easyFilePaths = []; 
 //Make the 27 file paths 
 easyFilePaths = generateEasyFilePaths(generate27Cards());
+console.log("Easy fiel paths - " + easyFilePaths);
 allPossibleEasySets = allSets(easyFilePaths); 
 var allPossibleSets = allSets(normalFilePathArray); 
 
@@ -207,13 +208,15 @@ export default function GameReducer(state = {
           currentCardsOnEasyBoard: [...drawEasyCards(12, firstTimeEasyArray)], 
           selectedCards: [],
           isCardNotClicked: true, 
-          allPossibleEasySets:[state.allPossibleEasySets]
+          setsFound:[],
+          allPossibleEasySets:[...allPossibleEasySets]
         }
       }else if(action.type === 'DRAW_EASY'){
         return{
           currentCardsOnEasyBoard: [...drawEasyCards(3, firstTimeEasyArray)],
           selectedCards: [],
-          isCardNotClicked: true, 
+          isCardNotClicked: true,
+          setsFound:[], 
           allPossibleEasySets:[...allPossibleEasySets]
         }
       }else if(action.type === 'RESET_EASY'){
@@ -221,13 +224,15 @@ export default function GameReducer(state = {
         return{
           currentCardsOnEasyBoard: [...drawEasyCards(12, firstTimeEasyArray)], 
           selectedCards: [],
-          isCardNotClicked: true, 
+          isCardNotClicked: true,
+          setsFound:[], 
           allPossibleEasySets:[...allPossibleEasySets]
         }
       }else if(action.type === 'NEW_GAME_MEDIUM'){
         return{
           currentCardsOnBoard : [...drawNormalCards(12, firstTimeNormalArray)],  
           selectedCards: [],
+          setsFound:[],
           isCardNotClicked: true, 
           allPossibleSets: [...allPossibleSets]
         }
@@ -235,6 +240,7 @@ export default function GameReducer(state = {
         return{
           currentCardsOnBoard : [...drawNormalCards(12, firstTimeNormalArray)],
           selectedCards: [],
+          setsFound:[],
           isCardNotClicked: true,
           allPossibleSets: [...allPossibleSets]
         }
@@ -243,13 +249,15 @@ export default function GameReducer(state = {
         return{
           currentCardsOnBoard : [...drawNormalCards(12, firstTimeNormalArray)],  
           selectedCards: [],
+          setsFound:[],
           isCardNotClicked: true, 
           allPossibleSets: [...allPossibleSets]
         }
       }else if(action.type === 'DRAW_NORMAL'){
         return{
           currentCardsOnBoard: [...drawNormalCards(3, firstTimeNormalArray)], 
-          selectedCards:[], 
+          selectedCards:[],
+          setsFound:[], 
           isCardNotClicked: true, 
           allPossibleSets: [...allPossibleSets]
         }

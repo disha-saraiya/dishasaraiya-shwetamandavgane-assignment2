@@ -17,11 +17,11 @@ export default function EasyGame(){
     }, [dispatch])
     
     return(
-        <div className="wrapBoardButtons"> 
+        <div > 
         <div >       
             <Board  cardsArray = {newGame.currentCardsOnEasyBoard} gameLevel="easy"/>
         </div>
-        <div className = "buttonDiv">
+        <div >
         <ResetButton  typeOfReset = {"easy"}/>
         <Draw3  typeOfDraw = "easy" />
         </div>
