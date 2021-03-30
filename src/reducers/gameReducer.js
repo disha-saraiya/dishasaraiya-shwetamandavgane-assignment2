@@ -111,10 +111,16 @@ function generateAllCards(){
   
   function drawEasyCards(numberOfCards, cardArray){
       easyFilePathArray = generateEasyFilePaths(generate27Cards()); 
-      for(var i=0; i<numberOfCards; i++){
-        cardArray.push(easyFilePathArray.pop()); 
+      for(var i=0; i<numberOfCards;){
+        //Need to modify this to extract from remainder of 27-12 cards 
+        var currCard = easyFilePathArray.pop()
+        console.log(easyFilePathArray);
+        if(!cardArray.includes(currCard)){
+         cardArray.push(currCard); 
+         i++;  
+         console.log(easyFilePathArray); 
+        }
       }
-      
       if(cardArray.length >= 27){
         alert("Please find sets within 27 cards on deck");
         return cardArray;
@@ -210,7 +216,31 @@ export default function GameReducer(state = {
           setsFound:[...state.setsFound],
           allPossibleEasySets:[...allPossibleEasySets]
         }
-      
+      }else if(action.type === 'UPDATE_STATE_EASY'){
+        console.log("trying to update from reducer" + action.type)
+        console.log("action.newSetsFound" + action.newSetsFound); 
+        console.log("action.newBoardCards" +action.newCurrentCardsOnEasyBoard)
+
+        //console.log(drawEasyCards(3, action.newCurrentCardsOnEasyBoard)); 
+        //var trialArray = [...action.newCurrentCardsOnEasyBoard].concat(drawEasyCards(3, firstTimeEasyArray))
+        //console.log("trial array try" +trialArray); 
+
+        // var crd1 = firstTimeEasyArray.pop(); 
+        // var crd2 = firstTimeEasyArray.pop(); 
+        // var crd3 = firstTimeEasyArray.pop(); 
+
+        
+        // var trialArray = [...action.newCurrentCardsOnEasyBoard].concat([crd1, crd2, crd3]);
+        // console.log("trial array try" +trialArray); 
+
+        var secondTrial = drawEasyCards(3, action.newCurrentCardsOnEasyBoard); 
+        console.log("second trial" +secondTrial); 
+        return{
+          ...state,
+          setsFound: [...state.setsFound, action.newSetsFound], 
+          //currentCardsOnEasyBoard: [...action.newCurrentCardsOnEasyBoard]
+          currentCardsOnEasyBoard: [...secondTrial]
+        }
       }else if(action.type === 'DRAW_EASY'){
         return{
           currentCardsOnEasyBoard: [...drawEasyCards(3, firstTimeEasyArray)],

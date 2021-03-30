@@ -47,6 +47,12 @@ https://archives.haskell.org/projects.haskell.org/diagrams/doc/manual.html?ref=d
 https://archives.haskell.org/projects.haskell.org/diagrams/doc/manual.html?ref=driverlayer.com/web#texture
 https://wiki.haskell.org/Colour 
 https://www.w3schools.com/css/css_border.asp and other w3schools articles
+Redux connect - 
+https://stackoverflow.com/questions/38202572/understanding-react-redux-and-mapstatetoprops
+https://www.pluralsight.com/guides/handle-parent-child-data-relationships-in-redux
+https://github.com/ahjorgen167/lecture_02_26_2020/tree/redux_tutorial/src and other lecture notes
+https://www.valentinog.com/blog/redux/
+
 
 
 Note: 
