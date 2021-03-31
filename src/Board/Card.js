@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 import  Bootbox  from  'bootbox-react';
 import { connect } from "react-redux";
 import {updateStateOfEasyGame} from '../actions'; 
+import {updateStateOfNormalGame} from '../actions'; 
 
 
 function Card(props){
@@ -18,12 +19,21 @@ const[isASetAlert, setIsASetAlert] = useState(true);
 const toggleClick = () => {
     setIsNotClicked(!isNotClicked); 
 
+    console.log("Selected card : " + props.imgLink + " value : "+ isNotClicked);
+    
     if(isNotClicked){
         newGame.selectedCards.push(props.imgLink);
+        setIsNotClicked(!isNotClicked); 
     }else{
         var index = newGame.selectedCards.indexOf(props.imgLink);
-        newGame.selectedCards.splice(index,1); 
+        console.log("Index = " + index);
+        if(index!==-1) {
+            newGame.selectedCards.splice(index,1); 
+            setIsNotClicked(!isNotClicked); 
+        }
     }
+
+    console.log(newGame.selectedCards+ " "+ newGame.selectedCards.length);
 
     if(newGame.selectedCards.length === 3){
         if(props.gameLevel === "easy"){
@@ -47,17 +57,24 @@ const toggleClick = () => {
 
                     // //Splice the three set cards from the current cards on the board. 
 
-                    newGame.currentCardsOnEasyBoard.splice(newGame.selectedCards[0],1); 
-                    newGame.currentCardsOnEasyBoard.splice(newGame.selectedCards[1],1); 
-                    newGame.currentCardsOnEasyBoard.splice(newGame.selectedCards[2],1); 
+                    let indexCard1 = newGame.currentCardsOnEasyBoard.indexOf(newGame.selectedCards[0]);
+                    if(indexCard1!==-1) newGame.currentCardsOnEasyBoard.splice(indexCard1,1); 
+                    let indexCard2 = newGame.currentCardsOnEasyBoard.indexOf(newGame.selectedCards[1]);
+                    if(indexCard2!==-1) newGame.currentCardsOnEasyBoard.splice(indexCard2,1); 
+                    let indexCard3 = newGame.currentCardsOnEasyBoard.indexOf(newGame.selectedCards[2]);
+                    if(indexCard3!==-1) newGame.currentCardsOnEasyBoard.splice(indexCard3,1); 
 
+                    console.log("INdex 1 " + indexCard1);
+                    console.log("Length newGame.currentCardsOnEasyBoard = " + newGame.currentCardsOnEasyBoard.length);
+
+                    //De-select the cards by removing them from the selectedCards array
+                    while(newGame.selectedCards.length!==0) {
+                        newGame.selectedCards.pop(); 
+                    }
                     //Update the state of the game, hence discarding the set cards and replacing with new cards. 
                     props.updateStateOfEasyGame(newGame.setsFound, newGame.currentCardsOnEasyBoard)
     
-                    //De-select the cards by removing them from the selectedCards array
-                    while(newGame.selectedCards.length!==0) {
-                           newGame.selectedCards.pop(); 
-                    } 
+                     
                     //Set flag is true because set is found. (To show the alert)
                     flag = true;
                     break;
@@ -70,19 +87,26 @@ const toggleClick = () => {
                 }
             }
 
-            console.log(newGame.selectedCards); 
-            newGame.selectedCards.pop(); 
-            newGame.selectedCards.pop(); 
-            newGame.selectedCards.pop(); 
-            console.log(newGame.selectedCards); 
+            
+            //newGame.selectedCards.pop(); 
+            //newGame.selectedCards.pop(); 
+            //newGame.selectedCards.pop(); 
+            console.log(newGame.selectedCards + " "+ newGame.selectedCards.length); 
 
             if(flag === true) {
                 setShowAlert(!showAlert);
                 setIsASetAlert(true);
             }
             else {setShowAlert(!showAlert); 
-                setIsASetAlert(false)
+                setIsASetAlert(false);
+
             };
+            
+
+          //  console.log("Sets " + newGame.setsFound);
+                
+           // console.log(newGame.selectedCards + " "+ newGame.selectedCards.length);    
+         
 
         //Logic for medium and hard game 
         }else if(props.gameLevel === "medium" || props.gameLevel === "hard"){
@@ -99,28 +123,56 @@ const toggleClick = () => {
                     (newGame.allPossibleSets[k][2]===newGame.selectedCards[0] 
                         || newGame.allPossibleSets[k][2]===newGame.selectedCards[1]
                         || newGame.allPossibleSets[k][2]===newGame.selectedCards[2]))
-                {
-                                newGame.setsFound.push(newGame.selectedCards); 
-                                console.log(newGame.setsFound);
-                                newGame.selectedCards = []; 
-                                flag = true;
-                                break;
-                } 
-                else{
-                    flag = false;
+                    {    
+                    //Push the newly found set. 
+                    newGame.setsFound.push([newGame.selectedCards[0], newGame.selectedCards[1],
+                        newGame.selectedCards[2]])
+                    
+                        // //Splice the three set cards from the current cards on the board. 
+    
+                        let indexCard1 = newGame.currentCardsOnBoard.indexOf(newGame.selectedCards[0]);
+                        if(indexCard1!==-1) newGame.currentCardsOnBoard.splice(indexCard1,1); 
+                        let indexCard2 = newGame.currentCardsOnBoard.indexOf(newGame.selectedCards[1]);
+                        if(indexCard2!==-1) newGame.currentCardsOnBoard.splice(indexCard2,1); 
+                        let indexCard3 = newGame.currentCardsOnBoard.indexOf(newGame.selectedCards[2]);
+                        if(indexCard3!==-1) newGame.currentCardsOnBoard.splice(indexCard3,1); 
+    
+                        //De-select the cards by removing them from the selectedCards array
+                        while(newGame.selectedCards.length!==0) {
+                            newGame.selectedCards.pop(); 
+                        }
+                        //Update the state of the game, hence discarding the set cards and replacing with new cards. 
+                        props.updateStateOfNormalGame(newGame.setsFound, newGame.currentCardsOnBoard)
+        
+                         
+                        //Set flag is true because set is found. (To show the alert)
+                        flag = true;
+                        break;
+    
+                    }
+                    //If a set is not found 
+                    else{
+                        //Set flag false if set is not found. 
+                        flag = false;
+                    }
                 }
-            }
-            if(flag === true){
-                setShowAlert(!showAlert);
-                setIsASetAlert(true); 
-            }
-            else{
-                setShowAlert(!showAlert); 
-                setIsASetAlert(false)
-            } 
-        }
+    
+                
+                //newGame.selectedCards.pop(); 
+                //newGame.selectedCards.pop(); 
+                //newGame.selectedCards.pop(); 
+                console.log(newGame.selectedCards + " "+ newGame.selectedCards.length); 
+    
+                if(flag === true) {
+                    setShowAlert(!showAlert);
+                    setIsASetAlert(true);
+                }
+                else {setShowAlert(!showAlert); 
+                    setIsASetAlert(false);
+                };
     }
     
+}
 }
 
 const determineCardClass = () => {
@@ -144,6 +196,7 @@ const selectMessage =() => {
     }
 }
 
+
 return( 
             <div>
             <img onClick = {toggleClick.bind(this)} 
@@ -162,8 +215,10 @@ let mapDispatchToProps = function(dispatch, props){
     console.log("Reached mapDispatchToProps in Card, trying to update state of game"); 
     return{
         updateStateOfEasyGame: (newSetsFound, newCurrentCardsOnEasyBoard) => dispatch(updateStateOfEasyGame(newSetsFound, newCurrentCardsOnEasyBoard)),
+        updateStateOfNormalGame: (newSetsFound, newCurrentCardsOnBoard) => dispatch(updateStateOfNormalGame(newSetsFound, newCurrentCardsOnBoard))
         }
 }
+
  
 
 export default connect(null, mapDispatchToProps)(Card) 

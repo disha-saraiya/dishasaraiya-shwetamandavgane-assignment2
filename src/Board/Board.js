@@ -12,6 +12,7 @@ function Board(props){
     return(
         <div className="container">
             <div className = "board row row-cols-4">
+                
             {props.currentCardsOnEasyBoard.map((e)  => {
                 
                 return (
@@ -34,7 +35,8 @@ function Board(props){
 let mapStateToProps = function(state,props){
     return{ 
         setsFound: state.newGame.setsFound, 
-        currentCardsOnEasyBoard: state.newGame.currentCardsOnEasyBoard  
+        currentCardsOnEasyBoard: state.newGame.currentCardsOnEasyBoard  ,
+        currentCardsOnBoard: state.newGame.currentCardsOnBoard  
     }
 }
 

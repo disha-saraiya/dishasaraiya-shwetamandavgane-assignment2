@@ -17,6 +17,11 @@ var easyImgPath = "";
 var easyFilePath= ""; 
 var firstTimeEasyArray = []; 
 var firstTimeNormalArray = [];
+var easycards = [];
+var nomoreeasydrawing = false;
+var allcards = [];
+var nomoredrawing = false;
+
 
 
 //--------------------------------------- Common initialization logic ----------------------------------------------------------
@@ -97,31 +102,36 @@ function generateAllCards(){
  
 // ----------------------------------------------------------- Logic for easy game level -------------------------------------------
 
-  function generateEasyFilePaths(cardArray){
+  function generateEasyFilePaths(numberOfCards, cardArray){
     var resultArray = [];
-    for(var i=0; i<27; i++){
+    for(var i=0; i<numberOfCards; i++){
       generateSVGPath(cardArray); 
       easyImgPath = "/img/" + easyFileStem + ".svg"; 
       easyFilePath = process.env.PUBLIC_URL + easyImgPath;
       resultArray.push(easyFilePath); 
-    }
-  
+    }  
     return resultArray;  
     }
   
+    
   function drawEasyCards(numberOfCards, cardArray){
-      easyFilePathArray = generateEasyFilePaths(generate27Cards()); 
-      for(var i=0; i<numberOfCards;){
-        //Need to modify this to extract from remainder of 27-12 cards 
-        var currCard = easyFilePathArray.pop()
-        console.log(easyFilePathArray);
-        if(!cardArray.includes(currCard)){
-         cardArray.push(currCard); 
-         i++;  
-         console.log(easyFilePathArray); 
+      if(nomoreeasydrawing === false){
+    
+        if(easycards.length === 0 ) easycards = generate27Cards();
+      
+        easyFilePathArray = generateEasyFilePaths(numberOfCards,easycards); 
+        
+        for(var i=0; i<numberOfCards;){
+          //Need to modify this to extract from remainder of 27-12 cards 
+          var currCard = easyFilePathArray.pop();
+          if(!cardArray.includes(currCard)){
+            cardArray.push(currCard); 
+            i++;  
+          }
         }
+        if(easycards.length === 0) nomoreeasydrawing = true;
       }
-      if(cardArray.length >= 27){
+      if(cardArray.length <= 0){
         alert("Please find sets within 27 cards on deck");
         return cardArray;
       }
@@ -130,9 +140,9 @@ function generateAllCards(){
     
 // -------------------------------------------------- Logic for medium and hard game level ------------------------------------------
   
-  function generateAllFilePaths(cardArray){
+  function generateAllFilePaths(numberOfCards,cardArray){
     var resultArray =[];
-    for(let i=0; i<81; i++){
+    for(let i=0; i<numberOfCards; i++){
     generateSVGPath(cardArray); 
     imgPath = "/img/" + fileStem + ".svg"; 
     filePath = process.env.PUBLIC_URL + imgPath;
@@ -143,7 +153,7 @@ function generateAllCards(){
 
     
   function drawNormalCards(numberOfCards, cardArray){
-    normalFilePathArray = generateAllFilePaths(generateAllCards()); 
+    /*normalFilePathArray = generateAllFilePaths(generateAllCards()); 
     for(var i=0; i<numberOfCards; i++){
       cardArray.push(normalFilePathArray.pop()); 
     }
@@ -151,7 +161,24 @@ function generateAllCards(){
       alert("Please find sets within 81 cards on deck");
       return cardArray;
     }
-    return cardArray;
+    return cardArray;*/
+    if(nomoredrawing === false){	   
+      if(allcards.length === 0 ) allcards = generateAllCards();
+          normalFilePathArray = generateAllFilePaths(numberOfCards,allcards); 
+              for(var i=0; i<numberOfCards; i++){
+              var currCard = normalFilePathArray.pop();
+                if(!cardArray.includes(currCard)){
+                    cardArray.push(currCard); 
+                    i++;  
+                  }
+              }
+              if(allcards.length === 0) nomoredrawing = true;
+      }
+          if(cardArray.length >= 81){
+              alert("Please find sets within 81 cards on deck");
+              return cardArray;
+          }
+          return cardArray;
   }
 // ---------------------------------------- Common game logic for all levels -----------------------------------------------------
 
@@ -197,9 +224,12 @@ const allSets = (filePaths) => {
 var allPossibleEasySets = []; 
 var easyFilePaths = []; 
 //Make the 27 file paths 
-easyFilePaths = generateEasyFilePaths(generate27Cards());
-allPossibleEasySets = allSets(easyFilePaths); 
-var allPossibleSets = allSets(normalFilePathArray); 
+easyFilePaths = generateEasyFilePaths(27,generate27Cards());
+allPossibleEasySets = allSets(easyFilePaths);
+var allFilePaths = []; 
+//Make the 81 file paths 
+allFilePaths = generateAllFilePaths(81,generateAllCards()); 
+var allPossibleSets = allSets(allFilePaths); 
 
 // ----------------------------------------------------- Game reducer ---------------------------------------------------------
 
@@ -209,7 +239,8 @@ export default function GameReducer(state = {
 }, action){
   
        if(action.type === 'NEW_GAME_EASY'){
-        return{
+         
+        return{    
           currentCardsOnEasyBoard: [...drawEasyCards(12, firstTimeEasyArray)], 
           selectedCards: [...state.selectedCards],
           isCardNotClicked: true, 
@@ -218,8 +249,8 @@ export default function GameReducer(state = {
         }
       }else if(action.type === 'UPDATE_STATE_EASY'){
         console.log("trying to update from reducer" + action.type)
-        console.log("action.newSetsFound" + action.newSetsFound); 
-        console.log("action.newBoardCards" +action.newCurrentCardsOnEasyBoard)
+       // console.log("action.newSetsFound" + action.newSetsFound); 
+        //console.log("action.newBoardCards" +action.newCurrentCardsOnEasyBoard)
 
         //console.log(drawEasyCards(3, action.newCurrentCardsOnEasyBoard)); 
         //var trialArray = [...action.newCurrentCardsOnEasyBoard].concat(drawEasyCards(3, firstTimeEasyArray))
@@ -243,17 +274,20 @@ export default function GameReducer(state = {
         }
       }else if(action.type === 'DRAW_EASY'){
         return{
+          ...state,
           currentCardsOnEasyBoard: [...drawEasyCards(3, firstTimeEasyArray)],
           selectedCards: [],
           isCardNotClicked: true,
-          setsFound:[], 
-          allPossibleEasySets:[...allPossibleEasySets]
+          setsFound: [...state.setsFound, action.newSetsFound], 
+          
         }
       }else if(action.type === 'RESET_EASY'){
         firstTimeEasyArray = []; 
+        easycards = [];
+        nomoreeasydrawing = false;
         return{
           currentCardsOnEasyBoard: [...drawEasyCards(12, firstTimeEasyArray)], 
-          selectedCards: [],
+          selectedCards: [],  
           isCardNotClicked: true,
           setsFound:[], 
           allPossibleEasySets:[...allPossibleEasySets]

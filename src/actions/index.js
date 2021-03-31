@@ -41,10 +41,20 @@ export const drawThreeNormal = () => {
     }
 }
 
-export const updateStateOfEasyGame = (newSetsFound, newCurrentCardsOnEasyBoard) => {
+export const updateStateOfEasyGame = (newSetsFound1, newCurrentCardsOnEasyBoard1) => {
     return{
         type: 'UPDATE_STATE_EASY', 
-        newSetsFound: newSetsFound, 
-        newCurrentCardsOnEasyBoard: newCurrentCardsOnEasyBoard
+        newSetsFound: newSetsFound1, 
+        newCurrentCardsOnEasyBoard: newCurrentCardsOnEasyBoard1
+        
+    }
+}
+
+export const updateStateOfNormalGame = (newSetsFound1, newCurrentCardsOnBoard1) => {
+    return{
+        type: 'UPDATE_STATE_NORMAL', 
+        newSetsFound: newSetsFound1, 
+        newCurrentCardsOnBoard: newCurrentCardsOnBoard1
+        
     }
 }
