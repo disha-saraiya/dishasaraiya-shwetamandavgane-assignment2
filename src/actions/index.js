@@ -1,6 +1,5 @@
 
 export const newGameEasy = () => {
-    console.log("reached action for new game easy"); 
     return{
         type: 'NEW_GAME_EASY',
         

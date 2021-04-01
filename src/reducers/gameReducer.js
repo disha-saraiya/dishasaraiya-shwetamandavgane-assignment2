@@ -250,7 +250,6 @@ export default function GameReducer(state = {
         }
       }else if(action.type === 'UPDATE_STATE_EASY'){
         var secondTrial = drawEasyCards(3, action.newCurrentCardsOnEasyBoard); 
-        console.log("second trial" +secondTrial); 
         return{
           ...state,
           setsFound: [...state.setsFound, action.newSetsFound], 
@@ -285,24 +284,8 @@ export default function GameReducer(state = {
           allPossibleSets: [...allPossibleSets]
         }
       }else if(action.type === 'UPDATE_STATE_MEDIUM'){
-        console.log("trying to update from reducer" + action.type)
-       // console.log("action.newSetsFound" + action.newSetsFound); 
-        //console.log("action.newBoardCards" +action.newCurrentCardsOnEasyBoard)
-
-        //console.log(drawEasyCards(3, action.newCurrentCardsOnEasyBoard)); 
-        //var trialArray = [...action.newCurrentCardsOnEasyBoard].concat(drawEasyCards(3, firstTimeEasyArray))
-        //console.log("trial array try" +trialArray); 
-
-        // var crd1 = firstTimeEasyArray.pop(); 
-        // var crd2 = firstTimeEasyArray.pop(); 
-        // var crd3 = firstTimeEasyArray.pop(); 
-
-        
-        // var trialArray = [...action.newCurrentCardsOnEasyBoard].concat([crd1, crd2, crd3]);
-        // console.log("trial array try" +trialArray); 
-
+      
         var secondTrial = drawNormalCards(3, action.newCurrentCardsOnBoard); 
-        console.log("second trial" +secondTrial); 
         return{
           ...state,
           setsFound: [...state.setsFound, action.newSetsFound], 

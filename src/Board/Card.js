@@ -19,21 +19,18 @@ const[isASetAlert, setIsASetAlert] = useState(true);
 const toggleClick = () => {
     setIsNotClicked(!isNotClicked); 
 
-    console.log("Selected card : " + props.imgLink + " value : "+ isNotClicked);
     
     if(isNotClicked){
         newGame.selectedCards.push(props.imgLink);
         setIsNotClicked(!isNotClicked); 
     }else{
         var index = newGame.selectedCards.indexOf(props.imgLink);
-        console.log("Index = " + index);
         if(index!==-1) {
             newGame.selectedCards.splice(index,1); 
             setIsNotClicked(!isNotClicked); 
         }
     }
 
-    console.log(newGame.selectedCards+ " "+ newGame.selectedCards.length);
 
     if(newGame.selectedCards.length === 3){
         if(props.gameLevel === "easy"){
@@ -64,8 +61,7 @@ const toggleClick = () => {
                     let indexCard3 = newGame.currentCardsOnEasyBoard.indexOf(newGame.selectedCards[2]);
                     if(indexCard3!==-1) newGame.currentCardsOnEasyBoard.splice(indexCard3,1); 
 
-                    console.log("INdex 1 " + indexCard1);
-                    console.log("Length newGame.currentCardsOnEasyBoard = " + newGame.currentCardsOnEasyBoard.length);
+                   
 
                     //De-select the cards by removing them from the selectedCards array
                     while(newGame.selectedCards.length!==0) {
@@ -87,11 +83,6 @@ const toggleClick = () => {
                 }
             }
 
-            
-            //newGame.selectedCards.pop(); 
-            //newGame.selectedCards.pop(); 
-            //newGame.selectedCards.pop(); 
-            console.log(newGame.selectedCards + " "+ newGame.selectedCards.length); 
 
             if(flag === true) {
                 setShowAlert(!showAlert);
@@ -101,12 +92,7 @@ const toggleClick = () => {
                 setIsASetAlert(false);
 
             };
-            
 
-          //  console.log("Sets " + newGame.setsFound);
-                
-           // console.log(newGame.selectedCards + " "+ newGame.selectedCards.length);    
-         
 
         //Logic for medium and hard game 
         }else if(props.gameLevel === "medium" || props.gameLevel === "hard"){
@@ -156,12 +142,6 @@ const toggleClick = () => {
                         flag = false;
                     }
                 }
-    
-                
-                //newGame.selectedCards.pop(); 
-                //newGame.selectedCards.pop(); 
-                //newGame.selectedCards.pop(); 
-                console.log(newGame.selectedCards + " "+ newGame.selectedCards.length); 
     
                 if(flag === true) {
                     setShowAlert(!showAlert);

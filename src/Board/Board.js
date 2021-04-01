@@ -5,10 +5,6 @@ import { connect } from 'react-redux';
 import {newGameEasy, newGameMedium, newGameHard, drawThreeEasy, drawThreeNormal} from '../actions'; 
 
 function Board(props){
-    //Dispatch action -> console.log("new game easy from board" + newGameEasy); 
-    //From the reducer -> 
-    //console.log("3. setsFound from BOARD for easy game" +props.setsFound); 
-    //console.log("4. currentCardsOnEasyBoard after splice from BOARD" +props.currentCardsOnEasyBoard); 
     let arrayToMap = []; 
     props.gameLevel === "easy" ? arrayToMap = props.currentCardsOnEasyBoard : arrayToMap = props.currentCardsOnBoard;
     return(
@@ -44,7 +40,6 @@ let mapStateToProps = function(state,props){
 }
 
 let mapDispatchToProps = function(dispatch, props){
-    //console.log(dispatch, newGameEasy)
     return{
         dispatch: dispatch, 
         newGameEasy, newGameMedium, newGameHard, drawThreeEasy, drawThreeNormal
