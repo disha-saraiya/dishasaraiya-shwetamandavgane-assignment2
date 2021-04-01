@@ -124,8 +124,8 @@ const toggleClick = () => {
                         || newGame.allPossibleSets[k][2]===newGame.selectedCards[1]
                         || newGame.allPossibleSets[k][2]===newGame.selectedCards[2]))
                     {    
-                    //Push the newly found set. 
-                    newGame.setsFound.push([newGame.selectedCards[0], newGame.selectedCards[1],
+                        //Push the newly found set. 
+                        newGame.setsFound.push([newGame.selectedCards[0], newGame.selectedCards[1],
                         newGame.selectedCards[2]])
                     
                         // //Splice the three set cards from the current cards on the board. 

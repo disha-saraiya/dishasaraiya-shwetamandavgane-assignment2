@@ -162,10 +162,11 @@ function generateAllCards(){
       return cardArray;
     }
     return cardArray;*/
+
     if(nomoredrawing === false){	   
       if(allcards.length === 0 ) allcards = generateAllCards();
           normalFilePathArray = generateAllFilePaths(numberOfCards,allcards); 
-              for(var i=0; i<numberOfCards; i++){
+              for(var i=0; i<numberOfCards; ){
               var currCard = normalFilePathArray.pop();
                 if(!cardArray.includes(currCard)){
                     cardArray.push(currCard); 
@@ -299,6 +300,31 @@ export default function GameReducer(state = {
           setsFound:[],
           isCardNotClicked: true, 
           allPossibleSets: [...allPossibleSets]
+        }
+      }else if(action.type === 'UPDATE_STATE_MEDIUM'){
+        console.log("trying to update from reducer" + action.type)
+       // console.log("action.newSetsFound" + action.newSetsFound); 
+        //console.log("action.newBoardCards" +action.newCurrentCardsOnEasyBoard)
+
+        //console.log(drawEasyCards(3, action.newCurrentCardsOnEasyBoard)); 
+        //var trialArray = [...action.newCurrentCardsOnEasyBoard].concat(drawEasyCards(3, firstTimeEasyArray))
+        //console.log("trial array try" +trialArray); 
+
+        // var crd1 = firstTimeEasyArray.pop(); 
+        // var crd2 = firstTimeEasyArray.pop(); 
+        // var crd3 = firstTimeEasyArray.pop(); 
+
+        
+        // var trialArray = [...action.newCurrentCardsOnEasyBoard].concat([crd1, crd2, crd3]);
+        // console.log("trial array try" +trialArray); 
+
+        var secondTrial = drawNormalCards(3, action.newCurrentCardsOnBoard); 
+        console.log("second trial" +secondTrial); 
+        return{
+          ...state,
+          setsFound: [...state.setsFound, action.newSetsFound], 
+          //currentCardsOnEasyBoard: [...action.newCurrentCardsOnEasyBoard]
+          currentCardsOnBoard: [...secondTrial]
         }
       }else if(action.type === 'NEW_GAME_HARD'){
         return{

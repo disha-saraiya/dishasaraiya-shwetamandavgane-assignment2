@@ -9,11 +9,14 @@ function Board(props){
     //From the reducer -> 
     //console.log("3. setsFound from BOARD for easy game" +props.setsFound); 
     //console.log("4. currentCardsOnEasyBoard after splice from BOARD" +props.currentCardsOnEasyBoard); 
+    let arrayToMap = []; 
+    props.gameLevel === "easy" ? arrayToMap = props.currentCardsOnEasyBoard : arrayToMap = props.currentCardsOnBoard;
     return(
+    
         <div className="container">
             <div className = "board row row-cols-4">
                 
-            {props.currentCardsOnEasyBoard.map((e)  => {
+             {arrayToMap.map((e)  => {
                 
                 return (
                 <div className="col d-inline-block">
